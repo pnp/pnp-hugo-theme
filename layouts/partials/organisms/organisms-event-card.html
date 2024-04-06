@@ -1,0 +1,10 @@
+
+{{/*
+    Matches: https://pnp.github.io/styleguide/?p=organisms-event-card
+{{ $data := dict "title" .Title "date" .Date "location" .Params.location }}
+*/}}
+
+<article class="card event">
+    {{ partial "molecules/molecules-card-side-plate-vert-event" . }}
+    {{ partial "molecules/molecules-card-content-event" . }}
+</article>

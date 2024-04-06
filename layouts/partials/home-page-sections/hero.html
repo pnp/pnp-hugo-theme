@@ -1,8 +1,7 @@
 <div class="hero-main-inner">
-    <div class="logo-big">
-        <span class="u-nowrap">Microsoft 365 &amp;</span><br><span class="fa-pp u-nowrap">Power
-            Platform</span><br><span class="fa-com u-nowrap">Community</span>
-    </div>
+
+    {{ partial "atoms/atoms-logo-big.html" (dict "title" .Site.Title) }}
+
     <div class="tagline">
         <p>Learn from others how to build apps on Microsoft 365 &amp; Power Platform.</p>
         <p>Don't reinvent the wheel. Focus on what truly matters for your organization.</p>

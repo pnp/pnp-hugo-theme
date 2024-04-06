@@ -1,0 +1,12 @@
+{{ $links := slice }}
+{{ if .joinUrl }}
+{{ $links = $links | append (dict "url" .joinUrl "iconName" "ms-teams-2" "ariaHidden" true "title" "Join in Microsoft Teams") }}
+{{ end }}
+{{ if .inviteUrl }}
+{{ $links = $links | append (dict "url" .inviteUrl "iconName" "icon-calendar-ltr-filled" "ariaHidden" true "title" "Calendar icon - Add to your Calendar") }}
+{{ end }}
+{{ if .youtubeUrl }}
+{{ $links = $links | append (dict "url" .youtubeUrl "iconName" "icon-video-clip-filled" "ariaHidden" true "title" "Play button - Visit Youtube") }}
+{{ end }}
+
+{{ partial "molecules/molecules-card-side-plate-vert" (dict "links" $links) }}

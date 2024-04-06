@@ -37,10 +37,10 @@ For example, if you want to use the [Logo Big](https://pnp.github.io/styleguide/
 {{ partial "atoms/logos/big.html" . }}
 ```
 
-Some partials require data to be passed to them. For example, the `atoms/logos/big.html` partial requires a `.title` object to be passed to it. You can pass data to a partial like this:
+Some partials require data to be passed to them. For example, the `atoms/atoms-logos-big.html` partial requires a `.title` object to be passed to it. You can pass data to a partial like this:
 
 ```html
-{{ partial "atoms/logos/big.html" (dict "title" "My PnP Site") }}
+{{ partial "atoms/logos/logo-big.html" (dict "title" "My PnP Site") }}
 ```
 
 > NOTE: In this "sample" site, we need to override the big logo partial to pass multiple lines of text. This is not a common use case and is only necessary for this site.

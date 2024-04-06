@@ -1,9 +1,11 @@
+{{/*
+Matches https://pnp.github.io/styleguide/?p=organisms-main-header
+
+Variables:
+. (Site): The site context
+*/}}
 <header class="page-header">
-    <a class="site-logo-link" href="{{ .Site.BaseURL }}">
-        <div class="site-logo">
-            <span class="u-nowrap">{{ .Site.Title }}</span>
-        </div>
-    </a>
+    {{ partial "atoms/atoms-logo-small.html" . }}
 
     <nav class="nav">
         <button class="hamburger" tabindex="-1">
@@ -16,6 +18,6 @@
                 <use xlink:href="/images/base-assets.svg#hamburger-inactive"></use>
             </svg>
         </button>
-        {{ partial "molecules/menus/nav-primary.html" .}}
+        {{ partial "molecules/molecules-nav-primary.html" . }}
     </nav>
 </header>

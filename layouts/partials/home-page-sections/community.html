@@ -7,7 +7,7 @@
         {{ $section := .Site.GetPage "section" "events" }}
         {{ range sort $section.Pages "Weight" "asc"}}
         <li>
-            {{ partial "organisms/cards/event" .Params }}
+            {{ partial "organisms/organisms-event-card" .Params }}
         </li>
         {{ end }}
     </menu>

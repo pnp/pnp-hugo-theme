@@ -13,7 +13,8 @@
         </li>
         {{ range .Site.Data.team.profiles}}
         <li>
-            {{ partial "organisms/cards/people" . }}
+
+            {{ partial "organisms/organisms-team-card" . }}
         </li>
         {{ end }}
         <li class="teams-end">

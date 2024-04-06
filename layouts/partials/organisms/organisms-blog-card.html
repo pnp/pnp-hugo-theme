@@ -1,3 +1,16 @@
+{{/*
+Matches https://pnp.github.io/styleguide/?p=organisms-blog-card
+
+Variables:
+.title: The title
+.imgSrc: The image URL
+.imgAlt: The alternate text for the image
+.description: The description
+.date: The date of the blog post
+.author: The author of the blog post
+.type: The blog post tag
+*/}}
+
 <article class="card blog">
 
     <figure class="blog-media">
@@ -5,7 +18,7 @@
     </figure>
     <div class="blog-content">
         <h2 class="blog-headline">
-            {{ .headline }}
+            {{ .title }}
         </h2>
         <p class="blog-excerpt">
             {{ .description }}

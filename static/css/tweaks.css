@@ -6,3 +6,7 @@ section:target:before {
     margin: -80px 0 0;
     /* Negative top margin of header height */
 }
+
+a.card-link {
+    text-decoration: none;
+}
