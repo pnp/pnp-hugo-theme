@@ -3,8 +3,7 @@ Matches https://pnp.github.io/styleguide/?p=organisms-blog-card
 
 Variables:
 .title: The title
-.imgSrc: The image URL
-.imgAlt: The alternate text for the image
+.image: The image URL
 .description: The description
 .date: The date of the blog post
 .author: The author of the blog post
@@ -14,7 +13,7 @@ Variables:
 <article class="card blog">
 
     <figure class="blog-media">
-        <img src="{{ .imgSrc }}" class="blog-media-img" alt="{{ .imgAlt | htmlEscape }}">
+        <img src="{{ .image }}" class="blog-media-img" alt="{{ .title | htmlEscape }}">
     </figure>
     <div class="blog-content">
         <h2 class="blog-headline">
@@ -25,13 +24,21 @@ Variables:
         </p>
         <div class="blog-meta">
             <div class="blog-info">
-                <time class="blog-created" datetime="2018-07-07">{{ .date }}</time>
+                <time class="blog-created" datetime="{{ .Date.Format "2006-01-02" }}">{{ .date | dateFormat "Jan 2, 2006" }}</time>
                 <div class="blog-author">by {{ .author }}</div>
             </div>
             <div class="blog-type">
-                <div class="blog-cat">
-                    {{ .type }}
+
+                    {{ with .categories }}
+                                    <div class="blog-cat">
+                    {{ with index . 0 }}
+                    {{ . }}
+                    {{ end }}
                 </div>
+                    {{ end }}
+
+                    
+
             </div>
         </div>
     </div>

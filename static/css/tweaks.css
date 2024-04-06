@@ -7,6 +7,6 @@ section:target:before {
     /* Negative top margin of header height */
 }
 
-a.card-link {
+a.card-link, a.blog-link {
     text-decoration: none;
 }

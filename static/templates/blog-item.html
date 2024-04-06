@@ -1,0 +1,21 @@
+<!-- static/templates/blog-item.html -->
+<a href="{{link}}" class="card-link">
+<article class="card blog">
+    <figure class="blog-media">
+        <img src="{{mediaContentUrl}}" class="blog-media-img" alt="{{title | safeHTML}}">
+    </figure>
+    <div class="blog-content">
+        <h2 class="blog-headline">{{title}}</h2>
+        <p class="blog-excerpt">{{description}}</p>
+        <div class="blog-meta">
+            <div class="blog-info">
+                <time class="blog-created" datetime="{{ date }}">{{pubDate}}</time>
+                <div class="blog-author">by {{author}}</div>
+            </div>
+            <div class="blog-type">
+                <div class="blog-cat">{{category}}</div>
+            </div>
+        </div>
+    </div>
+</article>
+</a>

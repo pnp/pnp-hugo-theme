@@ -1,0 +1,25 @@
+<header class="section-header">
+    <h1>Latest blog posts</h1>
+    <p>Stay up-to-date with the latest in Microsoft 365 &amp; Power Platform topics</p>
+</header>
+<div class="section-inner">
+    <header>
+        <H1></H1>
+        <p></p>
+    </header>
+    <menu class="section-grid" id="rss-section">
+{{/*
+Content is fetched from the RSS feed and displayed here. 
+
+The template is based on the blog-item.html template in the static/templates folder. 
+*/}}
+
+    </menu>
+</div>
+
+<script>
+    window.rssFeedUrl = 'https://pnp.github.io/blog/index.xml';
+</script>
+{{ $js := resources.Get "js/blog-feed.js" }}
+{{ $js = $js | resources.Minify | resources.Fingerprint }}
+<script src="{{ $js.Permalink }}"></script>
