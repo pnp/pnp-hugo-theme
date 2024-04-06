@@ -68,7 +68,7 @@ git commit -m "Your commit message"
 Push your changes:
 
 ```bash
-git push origin master
+git push origin main
 ```
 
 After you've pushed your changes, you'll need to update the submodule in your main project to point to the new commit. You can do this with the following commands:
