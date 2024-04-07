@@ -6,9 +6,17 @@
     <menu class="section-grid">
         {{ $section := .Site.GetPage "section" "events" }}
         {{ range sort $section.Pages "Weight" "asc"}}
+        
         <li>
             {{ partial "organisms/organisms-event-card" .Params }}
         </li>
         {{ end }}
     </menu>
+
+    {{ $section := .Site.GetPage "section" "events" }}
+    {{ $events := $section.Pages }}
+{{ range $events }}
+
+{{ partial "event-schema" . }}
+{{ end }}
 </div>

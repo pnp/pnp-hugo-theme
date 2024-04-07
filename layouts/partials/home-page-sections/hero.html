@@ -1,12 +1,15 @@
 <div class="hero-main-inner">
 
-    {{ partial "atoms/atoms-logo-big.html" (dict "title" .Site.Title) }}
+    {{ partial "atoms/atoms-logo-big.html" . }}
 
+{{ with .Site.Params.tagline }}
     <div class="tagline">
-        <p>Learn from others how to build apps on Microsoft 365 &amp; Power Platform.</p>
-        <p>Don't reinvent the wheel. Focus on what truly matters for your organization.</p>
+        {{ . | safeHTML }}
     </div>
+    {{ end }}
+    {{ with .Site.Params.callToAction }}
     <div class="call2action">
-        Changing the world one contribution at a time!
+        {{. | safeHTML }}
     </div>
+    {{ end}}
 </div>

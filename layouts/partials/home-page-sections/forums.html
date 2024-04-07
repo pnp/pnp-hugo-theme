@@ -5,57 +5,11 @@
         <p>Get answers to questions, collaborate and communicate with the community members.</p>
     </header>
         <menu class="section-grid">
+            {{ $section := .Site.GetPage "section" "forums" }}
+            {{ range sort $section.Pages "Title" "asc"}}
             <li>
-                <article class="card sample">
-                    <figure class="sample-media">
-                        <img src="../../images/sample-background.webp" class="sample-media-img" Background Image>
-                    </figure>
-                    <div class="card-hor">
-                        <h2 class="sample-headline">
-                            Microsoft Teams
-                        </h2>
-                        <p class="sample-desc">Learn more to help you build custom Microsoft Teams apps</p>
-                    </div>
-                </article>
+                {{ partial "organisms/organisms-sample-card" .Params }}
             </li>
-            <li>
-                <article class="card sample">
-                    <figure class="sample-media">
-                        <img src="../../images/sample-background.webp" class="sample-media-img" Background Image>
-                    </figure>
-                    <div class="card-hor">
-                        <h2 class="sample-headline">
-                            Microsoft Teams
-                        </h2>
-                        <p class="sample-desc">Learn more to help you build custom Microsoft Teams apps</p>
-                    </div>
-                </article>
-            </li>
-            <li>
-                <article class="card sample">
-                    <figure class="sample-media">
-                        <img src="../../images/sample-background.webp" class="sample-media-img" Background Image>
-                    </figure>
-                    <div class="card-hor">
-                        <h2 class="sample-headline">
-                            Microsoft Teams
-                        </h2>
-                        <p class="sample-desc">Learn more to help you build custom Microsoft Teams apps</p>
-                    </div>
-                </article>
-            </li>
-            <li>
-                <article class="card sample">
-                    <figure class="sample-media">
-                        <img src="../../images/sample-background.webp" class="sample-media-img" Background Image>
-                    </figure>
-                    <div class="card-hor">
-                        <h2 class="sample-headline">
-                            Microsoft Teams
-                        </h2>
-                        <p class="sample-desc">Learn more to help you build custom Microsoft Teams apps</p>
-                    </div>
-                </article>
-            </li>
+            {{ end }}
         </menu>
     </div>

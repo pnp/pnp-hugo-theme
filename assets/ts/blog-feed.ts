@@ -36,7 +36,7 @@ const createRSSPost = (item: RssItem, template: string): HTMLLIElement => {
         const regex = new RegExp(`{{${key}\\s*(\\|\\s*safeHTML)?}}`, 'g');
         const value = item[key as keyof RssItem] || '';
         const safeValue = safeHTML(value);
-        template = template.replace(regex, (match, p1) => p1 ? safeValue : value);
+        template = template.replace(regex, (_match, p1) => p1 ? safeValue : value);
     }
 
     li.innerHTML = template;

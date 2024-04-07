@@ -7,6 +7,13 @@ Variables:
 
 <a class="site-logo-link" href="{{ .Site.BaseURL }}">
     <div class="site-logo">
-        <span class="u-nowrap">{{ .Site.Title }}</span>
+        {{ $logoLines := default (slice .Site.Title) .Site.Params.smallLogo }}
+        {{ range $index, $line := $logoLines }}
+            {{ if eq $index (sub (len $logoLines) 1) }}
+            {{ $line }}
+            {{ else }}
+            <span class="u-nowrap">{{ $line }}</span><br>
+            {{ end }}
+        {{ end }}
     </div>
 </a>
