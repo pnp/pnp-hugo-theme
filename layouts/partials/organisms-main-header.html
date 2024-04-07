@@ -5,7 +5,7 @@ Variables:
 . (Site): The site context
 */}}
 <header class="page-header">
-    {{ partial "atoms/atoms-logo-small.html" . }}
+    {{ partial "atoms-logo-small.html" . }}
 
     <nav class="nav">
         <button class="hamburger" tabindex="-1">
@@ -18,6 +18,6 @@ Variables:
                 <use xlink:href="/images/base-assets.svg#hamburger-inactive"></use>
             </svg>
         </button>
-        {{ partial "molecules/molecules-nav-primary.html" . }}
+        {{ partial "molecules-nav-primary.html" . }}
     </nav>
 </header>

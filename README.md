@@ -31,19 +31,17 @@ For example, the theme's `layouts/index.html` is specifically designed for the h
 Wherever possible, the theme has a `partial` template for every pattern in the styleguide. You can use these partials in your content files.
 
 
-For example, if you want to use the [Logo Big](https://pnp.github.io/styleguide/?p=atoms-logo-big) pattern, which is located under `Atoms` > `Logos` > `Logo Big`, you can use the `logo-big.html` partial in your content file like this:
+For example, if you want to use the [Logo Big](https://pnp.github.io/styleguide/?p=atoms-logo-big) pattern, you can use the `atoms-logo-big.html` partial in your content file like this:
 
 ```html
-{{ partial "atoms/logos/big.html" . }}
+{{ partial "logos/big.html" . }}
 ```
 
-Some partials require data to be passed to them. For example, the `atoms/atoms-logos-big.html` partial requires a `.title` object to be passed to it. You can pass data to a partial like this:
+Some partials require data to be passed to them. For example, the `atoms-logo-big.html` partial requires a the context object to be passed to it. If you need to pass individual parameters to a partial, use this approach:
 
 ```html
-{{ partial "atoms/logos/logo-big.html" (dict "title" "My PnP Site") }}
+{{ partial "mypartial.html" (dict "title" "My PnP Site") }}
 ```
-
-> NOTE: In this "sample" site, we need to override the big logo partial to pass multiple lines of text. This is not a common use case and is only necessary for this site.
 
 Please refer to each partial template in the theme to see what data is required.
 

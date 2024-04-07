@@ -9,4 +9,4 @@
 {{ $links = $links | append (dict "url" .youtubeUrl "iconName" "icon-video-clip-filled" "ariaHidden" true "title" "Play button - Visit Youtube") }}
 {{ end }}
 
-{{ partial "molecules/molecules-card-side-plate-vert" (dict "links" $links) }}
+{{ partial "molecules-card-side-plate-vert" (dict "links" $links) }}

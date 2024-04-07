@@ -8,7 +8,7 @@
             {{ $section := .Site.GetPage "section" "forums" }}
             {{ range sort $section.Pages "Title" "asc"}}
             <li>
-                {{ partial "organisms/organisms-sample-card" .Params }}
+                {{ partial "organisms-sample-card" .Params }}
             </li>
             {{ end }}
         </menu>
