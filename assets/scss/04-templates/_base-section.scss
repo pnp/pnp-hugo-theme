@@ -53,7 +53,7 @@
 }
 
 .section-base {
-    background-image: url(/images/side-bg-right.webp), url(/images/side-bg-left.webp);
+    background-image: url(../images/side-bg-right.webp), url(../images/side-bg-left.webp);
     background-position: right top, left top;
 
     @media screen and (max-width: 720px) {
