@@ -70,7 +70,7 @@ var createRSSPost = function (item, template) {
         var regex = new RegExp("{{".concat(key, "\\s*(\\|\\s*safeHTML)?}}"), 'g');
         var value = item[key] || '';
         var safeValue = safeHTML(value);
-        template = template.replace(regex, function (match, p1) { return p1 ? safeValue : value; });
+        template = template.replace(regex, function (_match, p1) { return p1 ? safeValue : value; });
     };
     for (var key in item) {
         _loop_1(key);
@@ -96,7 +96,7 @@ var displayRss = function () { return __awaiter(void 0, void 0, void 0, function
                 rss = _a.sent();
                 items = parseRss(rss).slice(0, 4);
                 section = document.querySelector('#rss-section');
-                return [4 /*yield*/, fetch('/templates/blog-item.html')];
+                return [4 /*yield*/, fetch('templates/blog-item.html')];
             case 3:
                 templateResponse = _a.sent();
                 return [4 /*yield*/, templateResponse.text()];

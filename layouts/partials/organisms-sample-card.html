@@ -6,10 +6,10 @@ Variables:
 .image: The image URL
 
 */}}
-<a href="{{ .externalUrl }}" class="card-link">
+<a href="{{ .externalLink }}" class="card-link">
 <article class="card sample">
     <figure class="sample-media">
-        <img src="{{ .image }}" class="sample-media-img" alt="{{ .title | htmlEscape }}"/>
+        <img src="{{ .image  | absURL }}" class="sample-media-img" alt="{{ .title | htmlEscape }}"/>
     </figure>
     {{ partial "molecules-card-side-plate-hor" . }}
 </article>

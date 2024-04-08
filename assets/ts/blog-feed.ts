@@ -57,7 +57,7 @@ const displayRss = async (): Promise<void> => {
     const items = parseRss(rss).slice(0, 4);
     const section = document.querySelector('#rss-section');
 
-    const templateResponse = await fetch('/templates/blog-item.html');
+    const templateResponse = await fetch('templates/blog-item.html');
     const template = await templateResponse.text();
 
     items.forEach(item => {

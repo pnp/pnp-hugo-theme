@@ -13,7 +13,7 @@ Variables:
 <article class="card blog">
 
     <figure class="blog-media">
-        <img src="{{ .image }}" class="blog-media-img" alt="{{ .title | htmlEscape }}">
+        <img src="{{ .image | absURL }}" class="blog-media-img" alt="{{ .title | htmlEscape }}">
     </figure>
     <div class="blog-content">
         <h2 class="blog-headline">

@@ -1,19 +1,24 @@
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <link rel="stylesheet" href='{{ "/css/styles.css" | relURL}}'>
-    <link rel="stylesheet" href='{{ "/css/pattern-scaffolding.css" | relURL}}'>
-    <link rel="stylesheet" href='{{ "/css/tweaks.css" | relURL}}'>
-    <link rel="prefetch" href='{{ "/images/base-assets.svg" | relURL }}' as="image" type="image/svg+xml" media="all">
-    {{ $title := print .Site.Title " | " .Title }}
-    {{ if .IsHome }}{{ $title = .Site.Title }}{{ end }}
-    <title>{{ $title }}</title>
-    <!-- SEO -->
-    {{ partial "opengraph/opengraph" .}}
 
-    <!-- Twitter Card -->
-    {{ partial "opengraph/twitter" .}}
+{{ partial "head/meta-tags.html" . }}
 
-    {{ partial "favicon" . }}
+{{ if .Params.canonicalUrl }}
+<link rel="canonical" href="{{ .Params.canonicalUrl }}">
+{{ else }}
+<link rel="canonical" href="{{ .Permalink }}">
+{{ end }}
 
-</head>
+{{ partialCached "head/theme-styles.html" . }}
+
+{{ partialCached "head/custom-styles.html" . }}
+
+{{ template "_internal/opengraph.html" . }}
+
+{{ template "_internal/schema.html" . }}
+
+{{ template "_internal/twitter_cards.html" . }}
+
+{{ partial "head/favicon" . }}
+
+{{ partial "head/alternative-output-formats.html" . }}
+
+{{ partial "head/extensions.html" . }}

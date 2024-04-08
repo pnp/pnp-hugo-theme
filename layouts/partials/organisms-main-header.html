@@ -11,11 +11,11 @@ Variables:
         <button class="hamburger" tabindex="-1">
             <svg class="active">
                 <title id="ham-title-active">Click to close - Hamburger in form of arrows</title>
-                <use xlink:href="/images/base-assets.svg#hamburger"></use>
+                <use xlink:href="{{ "images/base-assets.svg" | relURL }}#hamburger"></use>
             </svg>
             <svg class="inactive">
                 <title id="ham-title-inactive">Click to open - Hamburger in form of three stripes</title>
-                <use xlink:href="/images/base-assets.svg#hamburger-inactive"></use>
+                <use xlink:href="{{ "images/base-assets.svg" | relURL }}#hamburger-inactive"></use>
             </svg>
         </button>
         {{ partial "molecules-nav-primary.html" . }}

@@ -1,0 +1,16 @@
+
+<main>
+    {{ $context := . }}
+
+    {{ range .Site.Params.homePageSections }}
+    {{ if eq . "hero" }}
+    <section class="hero-main">
+        {{ partial "home-page-sections/hero.html" $context }}
+    </section>
+    {{ else }}
+    <section class="section-base {{ . }}" id="{{ . }}">
+        {{ partial (printf "home-page-sections/%s.html" .) $ }}
+    </section>
+    {{ end }}
+    {{ end }}
+</main>
