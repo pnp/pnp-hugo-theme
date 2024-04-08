@@ -1,5 +1,6 @@
 
 <main>
+
     {{ $context := . }}
 
     {{ if and (in .Site.Params.homePageSections "blog-feed") (or (not .Site.Params.rssFeedUrl) (eq .Site.Params.rssFeedUrl "")) }}

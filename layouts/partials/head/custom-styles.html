@@ -1,10 +1,10 @@
 {{ range .Site.Params.customCSS }}
 {{ if $.Site.IsServer }}
 {{ $styles := resources.Get . }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen">
+<link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 {{ else }}
 {{ $styles := resources.Get . | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"
+<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}"
     crossorigin="anonymous" media="screen" />
 {{ end }}
 {{ end }}
@@ -14,10 +14,10 @@
 {{ if $.Site.IsServer }}
 {{ $cssOpts := (dict "enableSourceMap" true ) }}
 {{ $styles := resources.Get . | toCSS $cssOpts }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen">
+<link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 {{ else }}
 {{ $styles := resources.Get . | toCSS | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}"
+<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}"
     crossorigin="anonymous" media="screen" />
 {{ end }}
 {{ end }}

@@ -1,6 +1,5 @@
 @use '00-design-token/sg-index' as design-token;
-@import '00-base/designtoken.vars';
-// Namespace 'dt' was here, adjust accordingly.
+@use '00-base/designtoken.vars' as dt;
 
 .body-center {
     margin: auto;
@@ -42,13 +41,14 @@
     display: inline-grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(3, 80px);
-    grid-template-columns: repeat(auto-fill, 80px);
+    grid-template-columns: repeat(auto, 80px);
     margin-inline: auto;
 }
 
 .color-stage {
     min-height: 100vh;
     min-width: 100vh;
+    ;
     display: block;
     content: " ";
     background: linear-gradient(-135deg, var(--dark-blue) 0%, var(--blue), var(--light-blue))
@@ -56,43 +56,43 @@
 
 @keyframes cycle-colors {
     0% {
-        background-color: $off-white;
+        background-color: dt.$off-white;
     }
 
     10% {
-        background-color: $mid-gray;
+        background-color: dt.$mid-gray;
     }
 
     20% {
-        background-color: $brown;
+        background-color: dt.$brown;
     }
 
     30% {
-        background-color: $yellow;
+        background-color: dt.$yellow;
     }
 
     40% {
-        background-color: $orange;
+        background-color: dt.$orange;
     }
 
     50% {
-        background-color: $red;
+        background-color: dt.$red;
     }
 
     60% {
-        background-color: $magenta;
+        background-color: dt.$magenta;
     }
 
     70% {
-        background-color: $blue;
+        background-color: dt.$blue;
     }
 
     80% {
-        background-color: $teal;
+        background-color: dt.$teal;
     }
 
     90% {
-        background-color: $green;
+        background-color: dt.$green;
     }
 }
 
