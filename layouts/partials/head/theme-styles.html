@@ -7,7 +7,26 @@
 <link rel="preload" href='{{ "/fonts/pnp-pd-700.woff2" | relURL }}' as="font" type="font/woff2" crossorigin>
 <link rel="preload" href='{{ "/fonts/pnp-pd-800.woff2" | relURL }}' as="font" type="font/woff2" crossorigin>
 <link rel="preload" href='{{ "/fonts/pnp-pd-900.woff2" | relURL }}' as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href='{{ "css/styles.css" | relURL}}'>
-<link rel="stylesheet" href='{{ "css/pattern-scaffolding.css" | relURL}}'>
+
+{{ if .Site.IsServer }}
+{{ $cssOpts := (dict "targetPath" "css/styles.css" "enableSourceMap" true ) }}
+{{ $styles := resources.Get "scss/styles.scss" | resources.ExecuteAsTemplate "styles.css" . | toCSS $cssOpts }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen">
+{{ else }}
+{{ $cssOpts := (dict "targetPath" "css/styles.css" ) }}
+{{ $styles := resources.Get "scss/styles.scss" | resources.ExecuteAsTemplate "styles.css" . | toCSS $cssOpts | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen" />
+{{ end }}
+
+{{ if .Site.IsServer }}
+{{ $cssOpts := (dict "targetPath" "css/pattern-scaffolding.css" "enableSourceMap" true ) }}
+{{ $styles := resources.Get "scss/pattern-scaffolding.scss" | resources.ExecuteAsTemplate "pattern-scaffolding.css" . | toCSS $cssOpts }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen">
+{{ else }}
+{{ $cssOpts := (dict "targetPath" "css/pattern-scaffolding.css" ) }}
+{{ $styles := resources.Get "scss/pattern-scaffolding.scss" | resources.ExecuteAsTemplate "pattern-scaffolding.css" . | toCSS $cssOpts | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen" />
+{{ end }}
+
 <link rel="stylesheet" href='{{ "css/tweaks.css" | relURL}}'>
 <link rel="prefetch" href='{{ "images/base-assets.svg" | relURL }}' as="image" type="image/svg+xml" media="all">

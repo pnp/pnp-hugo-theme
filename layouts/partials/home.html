@@ -2,6 +2,10 @@
 <main>
     {{ $context := . }}
 
+    {{ if and (in .Site.Params.homePageSections "blog-feed") (or (not .Site.Params.rssFeedUrl) (eq .Site.Params.rssFeedUrl "")) }}
+    {{ warnf "homePageSections contains 'blog-feed' but rssFeedUrl is not specified" }}
+    {{ end }}
+
     {{ range .Site.Params.homePageSections }}
     {{ if eq . "hero" }}
     <section class="hero-main">
