@@ -10,7 +10,7 @@ Variables:
 .type: The blog post tag
 */}}
 
-<article class="card blog">
+<article class="card blog" aria-label="{{ .title | htmlEscape }}">
 
     <figure class="blog-media">
         <img src="{{ .image | absURL }}" class="blog-media-img" alt="{{ .title | htmlEscape }}">

@@ -12,6 +12,6 @@ Variables:
 .links: The links for the card
 */}}
 <article class="card people">
-    {{ partial "molecules-card-side-plate-vert-team" . }}
-    {{ partial "molecules-card-content-people" . }}
+    {{ partial "pnpstyles/molecules-card-side-plate-vert" (dict "links" .links) }}
+    {{ partial "pnpstyles/molecules-card-content-people" . }}
 </article>

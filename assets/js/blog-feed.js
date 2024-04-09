@@ -57,7 +57,8 @@ var parseRss = function (rss) {
             link: ((_e = item.querySelector('link')) === null || _e === void 0 ? void 0 : _e.textContent) || '',
             category: category,
             pubDate: formattedDate,
-            date: shortDate,
+            shortDate: shortDate,
+            isoDate: date.toISOString(),
             mediaContentUrl: ((_f = item.querySelector('content')) === null || _f === void 0 ? void 0 : _f.getAttribute('url')) || '',
             author: ((_g = item.querySelector('creator')) === null || _g === void 0 ? void 0 : _g.textContent) || 'PnP Community'
         };

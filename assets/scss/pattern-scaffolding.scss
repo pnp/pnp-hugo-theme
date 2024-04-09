@@ -1,7 +1,7 @@
 @use '00-design-token/sg-index' as design-token;
 @use '00-base/designtoken.vars' as dt;
 
-.body-center {
+.body-center{
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -13,17 +13,16 @@
     height: 300px;
 }
 
-.show-gradient {
+.show-gradient{
     margin: auto;
     width: 20svw;
-
-    &:after {
+    &:after{
         content: " ";
         display: block;
     }
 }
 
-.sg-color-box {
+.sg-color-box{
     box-sizing: border-box;
     display: flex;
     content: " ";
@@ -37,7 +36,7 @@
 
 }
 
-.sg-color-grid {
+.sg-color-grid{
     display: inline-grid;
     grid-auto-flow: column;
     grid-template-rows: repeat(3, 80px);
@@ -45,63 +44,53 @@
     margin-inline: auto;
 }
 
-.color-stage {
+.color-stage{
     min-height: 100vh;
-    min-width: 100vh;
-    ;
+    min-width: 100vh;;
     display: block;
     content: " ";
-    background: linear-gradient(-135deg, var(--dark-blue) 0%, var(--blue), var(--light-blue))
+    background: linear-gradient(-135deg, var(--dark-blue) 0%, var(--blue), var(--light-blue) )
 }
 
-@keyframes cycle-colors {
-    0% {
+@keyframes cycle-colors{
+    0%{
         background-color: dt.$off-white;
     }
-
-    10% {
+    10%{
         background-color: dt.$mid-gray;
     }
-
-    20% {
+    20%{
         background-color: dt.$brown;
     }
-
-    30% {
+    30%{
         background-color: dt.$yellow;
     }
-
-    40% {
+    40%{
         background-color: dt.$orange;
     }
-
-    50% {
+    50%{
         background-color: dt.$red;
     }
-
-    60% {
+    60%{
         background-color: dt.$magenta;
     }
-
-    70% {
+    70%{
         background-color: dt.$blue;
     }
-
-    80% {
+    80%{
         background-color: dt.$teal;
     }
-
-    90% {
+    90%{
         background-color: dt.$green;
     }
 }
 
-.card-test {
+.card-test{
     max-width: 420px;
     height: auto;
     margin: 15vh auto;
     aspect-ratio: 16 / 9;
-    background: url(/images/background.jpg);
+    background: url(../images/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
 }

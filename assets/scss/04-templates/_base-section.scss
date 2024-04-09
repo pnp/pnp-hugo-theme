@@ -6,17 +6,24 @@
 }
 
 .section-grid {
-    max-width: 1680px;
-    margin: auto 4vw;
-    list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: clamp(1rem, 4vw, 5rem);
+    max-width: 1680px;
     padding: 0;
-    transition: all .125s ease-in-out;
+    margin: auto 4vw;
+
+    grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr min-content;
+    gap: clamp(1rem, 4vw, 5rem);
+
+    transition: all .125s ease-in-out;
+
+    list-style-type: none;
 
     @media screen and (max-width: 1280px) {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media screen and (max-width: 1024px) {
         grid-template-columns: repeat(2, 1fr);
     }
 
@@ -26,22 +33,27 @@
 }
 
 .section-header {
+    max-width: 1680px;
+
     margin-block: 8vh;
     margin-block: 8svh;
-    max-width: 1680px;
     margin-inline: auto;
 
     h1 {
-        font-size: clamp(1.5rem, 3vw, 5rem);
-        grid-column: 1 / span 2;
-        text-align: center;
         margin-top: 2vw;
-        font-weight: 700;
-        color: dt.$dark-blue;
         margin-bottom: .25em;
+
+        grid-column: 1 / span 2;
+
+        font-size: clamp(1.5rem, 3vw, 5rem);
+        font-weight: 700;
+        text-align: center;
+
+        color: dt.$dark-blue;
 
         @media screen and (max-width: 1024px) {
             grid-column: 1 / span 1;
+
             font-size: clamp(1.25rem, 3vw, 5rem);
         }
     }
@@ -53,24 +65,40 @@
 }
 
 .section-base {
+    min-height: 80vh;
+
     background-image: url(../images/side-bg-right.webp), url(../images/side-bg-left.webp);
+
+    background-repeat: no-repeat;
+
     background-position: right top, left top;
 
     @media screen and (max-width: 720px) {
         background-position: right top, left bottom;
     }
 
-    background-repeat: no-repeat;
-    min-height: 80vh;
-
     &.team {
         margin-top: 20vh;
         margin-bottom: 25vh;
+
+        .section-grid {
+            @media screen and (max-width: 640px) {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
     }
 
     &.blog {
+
         .section-grid {
             grid-template-columns: repeat(4, 1fr);
-        } 
+
+            @media screen and (max-width: 1152px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @media screen and (max-width: 640px) {
+                grid-template-columns: repeat(1, 1fr);
+            }
+        }
     }
 }

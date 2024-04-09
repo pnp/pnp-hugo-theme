@@ -1,3 +1,4 @@
+// Base All
 @use '00-base/index' as base;
 
 // 01 Atoms
@@ -24,8 +25,10 @@
     }
 }
 
-.card{
-    animation: appear linear both;
-    animation-timeline: view();
-    animation-range: entry 10% cover 25%;
+.section-base {
+    .card {
+        animation: appear linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 25%;
+    }
 }

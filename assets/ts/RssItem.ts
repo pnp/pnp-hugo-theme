@@ -5,7 +5,8 @@ interface RssItem {
     link: string;
     category?: string;
     pubDate: string;
-    date: string;
+    shortDate: string;
+    isoDate: string;
     mediaContentUrl?: string;
     author: string;
 }

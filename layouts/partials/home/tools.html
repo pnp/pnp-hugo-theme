@@ -1,14 +1,14 @@
 
     <div class="section-inner">
     <header class="section-header">
-        <h1>Forums</h1>
-        <p>Get answers to questions, collaborate and communicate with the community members.</p>
+        <h1>Tools</h1>
+        <p>Perform tasks with a platform-agnostic command-line interface and with PowerShell.</p>
     </header>
         <menu class="section-grid">
-            {{ $section := .Site.GetPage "section" "forums" }}
+            {{ $section := .Site.GetPage "section" "tools" }}
             {{ range sort $section.Pages "Title" "asc"}}
             <li>
-                {{ partial "organisms-sample-card" .Params }}
+                {{ partial "pnpstyles/organisms-sample-card" .Params }}
             </li>
             {{ end }}
         </menu>

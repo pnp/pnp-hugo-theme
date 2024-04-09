@@ -69,7 +69,6 @@ An example:
   url = "about/"
 ```
 
-
 ## Complete Example
 
 This is a complete configuration example with some recommended values.

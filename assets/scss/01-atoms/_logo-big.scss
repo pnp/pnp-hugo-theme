@@ -28,30 +28,28 @@
 }
 
 .logo-big {
-
     box-sizing: border-box;
 
-    font-weight: 900;
     font-size: clamp(2rem, 6vw, 7rem);
-    line-height: 0.75;
+
     font-weight: 900;
-
-    color: transparent;
-    background-clip: text;
+    line-height: 0.75;
     text-transform: uppercase;
-
-    background: dt.$grad-lin-1;
-    background-size: 400% 400%;
-    background-clip: text;
-    // backdrop-filter: blur(10px) saturate(110%);
-    // filter: drop-shadow(-0.0625em -0.0625em 0.0625em rgba(255,255,255,.2))
-    //         drop-shadow(-0.125em 0.125em 0.0625em rgba(255,255,255,.2))
-    //         drop-shadow(0.125em -0.125em 0.0625em rgba(255,255,255,.2))
-    //         drop-shadow(-0.125em -0.125em 0.0625em rgba(255,255,255,.2));
             
     animation: rotate-background 30s ease-in-out infinite;
+
+    background-clip: text;
+    background-size: 400% 400%;
+
+    color: transparent;
+
+    background-image: dt.$grad-lin-1;
+
+
     @media screen and (max-width: 1024px){
         font-size: clamp(1rem, 9vw, 10rem);
+
+        background-clip: text;
     }
 
 }

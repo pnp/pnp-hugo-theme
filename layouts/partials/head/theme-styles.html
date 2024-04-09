@@ -8,6 +8,11 @@
 <link rel="preload" href='{{ "fonts/pnp-pd-800.woff2" | absURL }}' as="font" type="font/woff2" crossorigin>
 <link rel="preload" href='{{ "fonts/pnp-pd-900.woff2" | absURL }}' as="font" type="font/woff2" crossorigin>
 
+<style>
+    :root {
+        --base-url: "{{ partial "functions/base-url.html" . }}";
+    }
+</style>
 {{ if .Site.IsServer }}
 {{ $styles := resources.Get "css/styles.css" }}
 <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">

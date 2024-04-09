@@ -2,8 +2,10 @@ body {
     margin: 0;
 
     font-family: Parker, "Segoe UI", "Segoe Sans", sans-serif;
-    // text-rendering: geometricPrecision;
+
     scroll-behavior: smooth;
+
+    // text-rendering: geometricPrecision;text-renderingtext-renderingtext-renderingtext-rendering
 
 }
 
@@ -14,12 +16,13 @@ textarea {
 }
 
 .pnp-backdrop {
-    background: url(../images/keyart-bg.webp);
+    background-attachment: fixed;
     background-size: contain;
     background-size: cover;
 
+    background: url(../images/keyart-bg.webp);
+
     background-position: bottom left;
-    background-attachment: fixed;
 }
 
 

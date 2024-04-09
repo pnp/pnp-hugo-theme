@@ -11,6 +11,7 @@ const parseRss = (rss: string): RssItem[] => {
         const day = ('0' + date.getDate()).slice(-2);
         const shortDate = `${year}-${month}-${day}`;
         const formattedDate = `${date.getDate()} ${date.toLocaleString('default', { month: 'short' })}, ${year}`;
+        const isoDate = date.toISOString();
 
         let category = item.querySelector('category')?.textContent || '';
         category = category.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
@@ -21,7 +22,8 @@ const parseRss = (rss: string): RssItem[] => {
             link: item.querySelector('link')?.textContent || '',
             category: category,
             pubDate: formattedDate,
-            date: shortDate,
+            shortDate: shortDate,
+            isoDate: isoDate,
             mediaContentUrl: item.querySelector('content')?.getAttribute('url') || '',
             author: item.querySelector('creator')?.textContent || 'PnP Community'
         };

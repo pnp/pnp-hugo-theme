@@ -21,18 +21,19 @@
 .sample-gradient {
 
     --rotation-angle: 45deg;
-    // background: radial-gradient(circle,
-    //         var(--yellow),
-    //         var(--orange),
-    //         var(--red),
-    //         var(--magenta),
-    //         var(--orange),
-    //         var(--red),
-    //         var(--magenta),
-    //         var(--purple),
-    //         var(--blue),
-    //         var(--teal),
-    //         var(--green));
+    box-sizing: border-box;
+    height: 100vh;
+    padding: 2vw 2vw;
+
+    font-size: clamp(1rem, calc(9vw), 14rem);
+    font-weight: 900;
+    line-height: 0.85;
+    text-transform: uppercase;
+
+    animation: rotate-background 60s ease-in-out infinite;
+
+    background-clip: text;
+
     background-image: linear-gradient(var(--rotation-angle),
             var(--yellow),
             var(--orange),
@@ -42,29 +43,23 @@
             var(--blue),
             var(--teal),
             var(--green));
-    // radial
-    background-size: 100% 100%;
     background-repeat: no-repeat;
-    height: 100vh;
-    font-size: clamp(1rem, calc(9vw), 14rem);
-    line-height: 0.85;
-    font-weight: 900;
-    box-sizing: border-box;
-    padding: 2vw 2vw;
+
+    background-size: 100% 100%;
     color: transparent;
-    background-clip: text;
-    animation: rotate-background 60s ease-in-out infinite;
-    text-transform: uppercase;
 }
 
 
 // background: radial-gradient(ellipse at top, #e66465, transparent),
-//             radial-gradient(ellipse at bottom, #4d9f0c, transparent);
+//             radial-gradient(ellipse at bottom, #4d9f0c, transparent);backgroundbackgroundbackgroundbackgroundbackgroundbackground
 
 // background: radial-gradient(closest-side, #3f87a6, #ebf8e1, #f69d3c);
 
+backgroundbackground
 
-.animated {
+backgroundbackground
+
+backgroundbackground .animated {
     --rotation: 45deg;
 
     background-image: linear-gradient(var(--rotation-angle), var(--yellow) 0, var(--red) 25%, var(--orange) 50%, var(--magenta) 75%, var(--purple) 100%);
@@ -72,6 +67,7 @@
 }
 
 @keyframes move-background {
+
     0% {
         background-position: 0 0;
     }
@@ -98,7 +94,7 @@
     0% {
         --rotation-angle: 0deg;
         background-position: 0 0;
-        
+
     }
 
     35% {
