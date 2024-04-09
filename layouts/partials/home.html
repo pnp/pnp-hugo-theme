@@ -1,23 +1,9 @@
 
 <main>
-
-    {{ $context := . }}
-
-    {{ if and (in .Site.Params.homePageSections "blog-feed") (or (not .Site.Params.rssFeedUrl) (eq .Site.Params.rssFeedUrl "")) }}
-    {{ errorf "homePageSections contains 'blog-feed' but rssFeedUrl is not specified" }}
+    {{ $section := .Site.GetPage "section" "home" }}
+    {{ $homePageSections := $section.Pages.ByWeight }}
+    {{ range $homePageSections }}
+        {{- .Render "single" -}}
     {{ end }}
-
-    {{ range .Site.Params.homePageSections }}
-    {{ if eq . "hero" }}
-    <section class="hero-main">
-        {{ partial "home/hero.html" $context }}
-    </section>
-    {{ else }}
-    <section class="section-base {{ . }}" id="{{ . }}">
-        {{ partial (printf "home/%s.html" .) $ }}
-    </section>
-    {{ end }}
-    {{ end }}
-
-    {{ partialCached "home/extension-content.html" . }}
+    {{ partialCached "home/extensions.html" . }}
 </main>

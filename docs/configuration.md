@@ -34,10 +34,7 @@ These are all the parameters used by `pnp-hugo-theme` theme.
 | customJS                      | list   | No       | Add extra JS files to the website.               | []                               | `["js/extra-script.js"]`                         |
 | customRemoteJS                | list   | No       | Add extra remote JS files to the website.        | []                               | `["https://www.example.com/file.js"]`            |
 | disablePnPTelemetry | bool | No | If true, disables telemetry for PnP components | `false` | `true` or `false` |
-| callToAction | string | No | The call to action at the bottom of the hero section | `""` | `"Changing the world one contribution at a time!"` |
-| tagLine | string | No | The tagline used in the hero section, on the right of the big logo. Supports HTML. | `""` | `"<p>Learn from others how to build apps on Microsoft 365 & Power Platform.</p><p>Don't reinvent the wheel. Focus on what truly matters for your organization.</p>"` |
 | rssFeedUrl | string | No | The URL to the RSS feed. Required if you include the "blog-feed" section. | `""` | `"https://pnp.github.io/blog/index.xml"` |
-| homePageSections | [] | No | The sections to include on the home page. | [] | `["hero", "blog-feed", "community", "guidance", "samples", "sdks", "tools", "extensions", "forums", "team"]` | `["hero", "blog-feed", "community", "guidance", "samples", "sdks", "tools", "extensions", "forums", "team"]` |
 | bigLogo | [] | No | The big logo is used in the hero section. You can split the title into multiple lines if it's too long | [] | `[[line]]` |
 | smallLogo | [] | No | The small logo is used in the hero section. You can split the title into multiple lines if it's too long | [] | `["Microsoft 365 & Power", "Platform Community"]` |
 

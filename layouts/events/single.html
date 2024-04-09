@@ -1,22 +1,22 @@
+<section class="section-base" id="{{ .File.BaseFileName | safeHTML }}">
 <div class="section-inner">
     <header class="section-header">
-        <h1>Microsoft 365 &amp; Power Platform Community Calls</h1>
-        <p>Stay up-to-date with the latest in Microsoft 365 &amp; Power Platform topics</p>
+        <h1>{{.Title | safeHTML }}</h1>
+        <p>{{.Description | safeHTML }}</p>
     </header>
     <menu class="section-grid">
         {{ $section := .Site.GetPage "section" "events" }}
-        {{ range sort $section.Pages "Weight" "asc"}}
-        
+        {{ range sort $section.Pages "Weight" "asc" -}}
         <li>
             {{ partial "pnpstyles/organisms-event-card" .Params }}
         </li>
-        {{ end }}
+        {{- end }}
     </menu>
 
     {{ $section := .Site.GetPage "section" "events" }}
     {{ $events := $section.Pages }}
-{{ range $events }}
-
-{{ partial "event-schema" . }}
-{{ end }}
+    {{ range $events -}}
+    {{- partial "event-schema" . -}}
+    {{- end }}
 </div>
+</section>

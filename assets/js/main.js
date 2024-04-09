@@ -1,7 +1,7 @@
 "use strict";
-var hamburgerMenu = document.querySelector('.hamburger');
-var menuPrimary = document.querySelector('.nav-menu.primary');
-var showMenu = function (_evt) {
+const hamburgerMenu = document.querySelector('.hamburger');
+const menuPrimary = document.querySelector('.nav-menu.primary');
+const showMenu = (_evt) => {
     if (hamburgerMenu) {
         hamburgerMenu.classList.toggle('show');
         if (hamburgerMenu.classList.contains('show')) {

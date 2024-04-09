@@ -1,15 +1,4 @@
-
-    <div class="section-inner">
-    <header class="section-header">
-        <h1>Extensions</h1>
-        <p>Boost your productivity without leaving the context of your work.</p>
-    </header>
-        <menu class="section-grid">
-            {{ $section := .Site.GetPage "section" "extensions" }}
-            {{ range sort $section.Pages "Title" "asc"}}
-            <li>
-                {{ partial "pnpstyles/organisms-sample-card" .Params }}
-            </li>
-            {{ end }}
-        </menu>
-    </div>
+{{/*
+You can add further theme extensions or customizations here if they should
+appear before the end of the page section.
+*/}}
