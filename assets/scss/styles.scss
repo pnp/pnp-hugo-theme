@@ -32,3 +32,23 @@
         animation-range: entry 10% cover 25%;
     }
 }
+
+section:target:before {
+    content: "";
+    display: block;
+    height: 80px;
+    margin: -80px 0 0
+}
+
+a.card-link,
+a.blog-link {
+    text-decoration: none
+}
+
+@media (prefers-reduced-motion) {
+    * {
+        transition: none !important;
+        animation: none !important;
+        transform: none !important;
+    }
+}

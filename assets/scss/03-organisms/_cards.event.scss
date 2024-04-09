@@ -3,9 +3,13 @@
 .card{
 
     &.event{
-
+        height: 100%;
         .card-header{
             color: dt.$dark-purple;
+            h1{
+                font-size: clamp(1.5rem, 1.25vw, 1.75rem);
+                line-height: 1.15;
+            }
 
             @media screen and (max-width: 720px) {
 

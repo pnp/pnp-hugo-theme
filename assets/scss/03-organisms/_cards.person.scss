@@ -5,6 +5,7 @@
 
     grid-template-columns: auto 4.5rem;
     grid-column: 1 / span 1;
+    height: 100%;
 
     backdrop-filter: saturate(100%);
 
@@ -140,8 +141,8 @@
 }
 
 .profile-picture {
-    width: clamp(4rem, 7vw, 400px);
-    height: clamp(4rem, 7vw, 400px);
+    width: clamp(4rem, 7vw, 125px);
+    height: clamp(4rem, 7vw, 125px);
     border: 2px white solid;
     border-radius: 50%;
     aspect-ratio: 1 / 1;
@@ -149,8 +150,8 @@
     flex-shrink: 0;
 
     @media screen and (max-width: 1024px) {
-        width: clamp(4rem, 20vw, 400px);
-        height: clamp(4rem, 20vw, 400px);
+        width: clamp(4rem, 20vw, 125px);
+        height: clamp(4rem, 20vw, 125px);
         margin: auto;
     }
 
@@ -172,6 +173,11 @@
 
     backdrop-filter: blur(10px) saturate(300%);
     background-color: rgba(255, 255, 255, 0.9);
+
+    @media screen and (min-width: 1280px) {
+        grid-column: 1 / span 2;
+        grid-row: 1 / span 2;
+    }
 
     @media screen and (max-width: 720px) {
         grid-column: 1 / span 2;

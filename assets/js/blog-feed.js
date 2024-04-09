@@ -49,6 +49,7 @@ var parseRss = function (rss) {
         var day = ('0' + date.getDate()).slice(-2);
         var shortDate = "".concat(year, "-").concat(month, "-").concat(day);
         var formattedDate = "".concat(date.getDate(), " ").concat(date.toLocaleString('default', { month: 'short' }), ", ").concat(year);
+        var isoDate = date.toISOString();
         var category = ((_b = item.querySelector('category')) === null || _b === void 0 ? void 0 : _b.textContent) || '';
         category = category.split(' ').map(function (word) { return word.charAt(0).toUpperCase() + word.slice(1); }).join(' ');
         return {
@@ -58,7 +59,7 @@ var parseRss = function (rss) {
             category: category,
             pubDate: formattedDate,
             shortDate: shortDate,
-            isoDate: date.toISOString(),
+            isoDate: isoDate,
             mediaContentUrl: ((_f = item.querySelector('content')) === null || _f === void 0 ? void 0 : _f.getAttribute('url')) || '',
             author: ((_g = item.querySelector('creator')) === null || _g === void 0 ? void 0 : _g.textContent) || 'PnP Community'
         };

@@ -2,6 +2,7 @@
 
 .nav-menu {
     display: inline-flex;
+    gap: 0.75em;
     padding: 0;
     padding-block: 0.35em 0.5em;
     padding-inline: 1vw 1vw;
@@ -18,7 +19,7 @@
     filter: drop-shadow(3px 3px 30px rgba(#666, 0.75));
 
     list-style: none;
-    background: rgba(255, 252, 248, 0.85);
+    background-color: rgba(255, 252, 248, 0.85);
 
     @media screen and (max-width: 1024px) {
         position: absolute;
@@ -36,7 +37,7 @@
         font-size: clamp(1rem, 4vh, 2rem);
 
         oveflow: hidden;
-        background: rgba(255, 255, 255, 1);
+        background-color: rgba(255, 255, 255, 1);
 
         .nav-link{
             white-space: wrap;

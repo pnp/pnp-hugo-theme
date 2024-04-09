@@ -5,11 +5,11 @@
    height: 90svh;
    padding-block: 300px;
 
-   background: rgba(9, 31, 44, 1);
+   background-color: rgba(9, 31, 44, 1);
    aspect-ration: 16 / 9;
 
    &:nth-child(even) {
-     background: rgba(217, 217, 214, 1);
+     background-color: rgba(217, 217, 214, 1);
    }
  }
 
