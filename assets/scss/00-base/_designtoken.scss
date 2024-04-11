@@ -58,7 +58,7 @@
     --frosted-glass-size: 200px 200px;
 
     /* Linear gradient */
-    --grad-lin-1: linear-gradient(var(--rotation-angle),
+    --grad-lin-1: linear-gradient(var(--rotation-angle, 45deg),
             var(--yellow),
             var(--orange),
             var(--red),

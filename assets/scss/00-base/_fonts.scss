@@ -77,3 +77,10 @@
     font-display: swap;
     src: url(var(--base-url) + "fonts/pnp-pd-900.woff2") format("woff2"), local("Segoe Sans");
 }
+
+@font-face {
+    font-family: 'Commodore 64 Pixelized';
+    font-style: normal;
+    font-weight: 400;
+    src: url(var(--base-url) + "fonts/commodore-64.woff2") format("woff2");
+}

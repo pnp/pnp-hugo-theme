@@ -8,118 +8,88 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-const displayiCal = () => __awaiter(void 0, void 0, void 0, function* () {
-    const icsUrl = 'https://outlook.office365.com/owa/calendar/c80c26982a604d3e89b403a318e7a477@officedevpnp.onmicrosoft.com/ca3a6fcd2d944eedb7f87d13bea580af13174372598351020792/calendar.ics'; // Replace with your .ics file URL
-    // const response = await fetch(icsUrl);
-    const response = yield fetch(icsUrl, { mode: 'no-cors' });
-    const iCal = yield response.text();
-    console.log(iCal);
-    const items = convert(iCal);
-    console.log(items);
-    // const items = parseiCal(iCal).slice(0, 4);
-    // const section = document.querySelector('#iCal-section');
-    // const templateResponse = await fetch('templates/blog-item.html');
-    // const template = await templateResponse.text();
-    // items.forEach(item => {
-    //     const div = createiCalPost(item, template);
-    //     if (section) {
-    //         section.appendChild(div);
-    //     }
-    // });
-});
-// Call the function when the page loads
-window.addEventListener('DOMContentLoaded', displayiCal);
-// Make sure lines are splited correctly
-// http://stackoverflow.com/questions/1155678/javascript-string-newline-character
-const NEW_LINE = /\r\n|\n|\r/;
-const COLON = ':';
-// const COMMA = ",";
-// const DQUOTE = "\"";
-// const SEMICOLON = ";";
-const SPACE = ' ';
-/**
- * Take ical string data and convert to JSON
- */
-function convert(source) {
-    const output = {};
-    const lines = source.split(NEW_LINE);
-    let parentObj = {};
-    let currentObj = output;
-    const parents = [];
-    let currentKey = '';
-    for (let i = 0; i < lines.length; i++) {
-        let currentValue = '';
-        const line = lines[i];
-        if (line.charAt(0) === SPACE) {
-            currentObj[currentKey] += line.substring(1);
-        }
-        else {
-            const splitAt = line.indexOf(COLON);
-            if (splitAt < 0) {
-                continue;
-            }
-            currentKey = line.substring(0, splitAt);
-            currentValue = line.substring(splitAt + 1);
-            switch (currentKey) {
-                case 'BEGIN':
-                    parents.push(parentObj);
-                    parentObj = currentObj;
-                    if (parentObj[currentValue] == null) {
-                        parentObj[currentValue] = [];
-                    }
-                    // Create a new object, store the reference for future uses
-                    currentObj = {};
-                    parentObj[currentValue].push(currentObj);
-                    break;
-                case 'END':
-                    currentObj = parentObj;
-                    parentObj = parents.pop();
-                    break;
-                default:
-                    if (currentObj[currentKey]) {
-                        if (!Array.isArray(currentObj[currentKey])) {
-                            currentObj[currentKey] = [currentObj[currentKey]];
-                        }
-                        currentObj[currentKey].push(currentValue);
-                    }
-                    else {
-                        currentObj[currentKey] = currentValue;
-                    }
-            }
-        }
+class ICALParser {
+    constructor(icalData) {
+        this.rawData = icalData;
+        this.events = [];
     }
-    return output;
-}
-/**
- * Take JSON, revert back to ical
- */
-function revert(object) {
-    const lines = [];
-    for (const key in object) {
-        const value = object[key];
-        if (Array.isArray(value)) {
-            if (key === 'RDATE') {
-                value.forEach((item) => {
-                    lines.push(key + ':' + item);
-                });
+    parse() {
+        const lines = this.rawData.split(/\r\n|\n|\r/);
+        let currentEvent = null;
+        lines.forEach(line => {
+            if (line.startsWith('BEGIN:VEVENT')) {
+                currentEvent = {};
             }
-            else {
-                value.forEach((item) => {
-                    lines.push('BEGIN:' + key);
-                    lines.push(revert(item));
-                    lines.push('END:' + key);
-                });
+            else if (line.startsWith('END:VEVENT')) {
+                this.events.push(currentEvent);
+                currentEvent = null;
             }
-        }
-        else {
-            let fullLine = key + ':' + value;
-            do {
-                // According to ical spec, lines of text should be no longer
-                // than 75 octets
-                lines.push(fullLine.substring(0, 75));
-                fullLine = SPACE + fullLine.substring(75);
-            } while (fullLine.length > 1);
-        }
+            else if (currentEvent) {
+                const [key, value] = line.split(':');
+                switch (key) {
+                    case 'SUMMARY':
+                        currentEvent.summary = value;
+                        break;
+                    case 'DTSTART':
+                        currentEvent.dtstart = this.parseDate(value);
+                        break;
+                    case 'DTEND':
+                        currentEvent.dtend = this.parseDate(value);
+                        break;
+                    // Add more cases as per your need
+                }
+            }
+        });
     }
-    return lines.join('\n');
+    parseDate(dateStr) {
+        // Basic date parsing, consider time zones and formats for production code
+        const year = parseInt(dateStr.substr(0, 4));
+        const month = parseInt(dateStr.substr(4, 2)) - 1; // JS months are 0-indexed
+        const day = parseInt(dateStr.substr(6, 2));
+        return new Date(year, month, day);
+    }
+    getEvents() {
+        return this.events;
+    }
 }
+function fetchAndParseICS(url) {
+    return __awaiter(this, void 0, void 0, function* () {
+        const response = yield fetch(url);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        const data = yield response.text();
+        const parser = new ICALParser(data);
+        parser.parse();
+        console.log(parser.getEvents());
+        // return events.map((eventComp: any) => {
+        //     const event = new ICAL.Event(eventComp);
+        //     return {
+        //         summary: event.summary,
+        //         start: event.startDate.toJSDate(),
+        //         end: event.endDate.toJSDate(),
+        //     };
+        // });
+    });
+}
+function displayEvents(events) {
+    const eventsContainer = document.getElementById('events-container');
+    if (!eventsContainer)
+        return;
+    eventsContainer.innerHTML = '';
+    events.forEach(event => {
+        const eventElement = document.createElement('div');
+        eventElement.className = 'event';
+        const title = document.createElement('h3');
+        title.textContent = event.summary;
+        const when = document.createElement('p');
+        when.textContent = `Start: ${event.start} - End: ${event.end}`;
+        eventElement.appendChild(title);
+        eventElement.appendChild(when);
+        eventsContainer.appendChild(eventElement);
+    });
+}
+const icsUrl = 'https://outlook.office365.com/owa/calendar/c80c26982a604d3e89b403a318e7a477@officedevpnp.onmicrosoft.com/ca3a6fcd2d944eedb7f87d13bea580af13174372598351020792/calendar.ics'; // Replace with your .ics file URL
+fetchAndParseICS(icsUrl);
+// .then(displayEvents)
+// .catch(error => console.error('Error loading calendar:', error));

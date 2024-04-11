@@ -63,6 +63,12 @@
   font-display: swap;
   src: url(var(--base-url)fonts/pnp-pd-900.woff2) format("woff2"), local("Segoe Sans");
 }
+@font-face {
+  font-family: "Commodore 64 Pixelized";
+  font-style: normal;
+  font-weight: 400;
+  src: url(var(--base-url)fonts/commodore-64.woff2) format("woff2");
+}
 .stage {
   overflow: clip;
   height: 90svh;
@@ -209,7 +215,7 @@
   --frosted-glass: "../../images/noise.svg";
   --frosted-glass-size: 200px 200px;
   /* Linear gradient */
-  --grad-lin-1: linear-gradient(var(--rotation-angle),
+  --grad-lin-1: linear-gradient(var(--rotation-angle, 45deg),
           var(--yellow),
           var(--orange),
           var(--red),
@@ -578,7 +584,7 @@ textarea {
   color: var(--dark-purple);
 }
 .card.event .card-header h1 {
-  font-size: clamp(1.5rem, 1.25vw, 1.75rem);
+  font-size: clamp(1.25rem, 1.25vw, 1.5rem);
   line-height: 1.15;
 }
 @media screen and (max-width: 720px) {
@@ -781,7 +787,7 @@ textarea {
 }
 
 .blog-content {
-  overflow: clip;
+  overflow: hidden;
   padding: 1em;
   padding-bottom: 0.74em;
   border-radius: 0 0 1em 1em;
@@ -944,6 +950,7 @@ textarea {
 .people .card-iconbar {
   margin-right: calc(1.25rem + 2px);
   margin-left: calc(1.25rem - 2px);
+  gap: 0.65em;
 }
 
 @media screen and (max-width: 640px) {
@@ -1243,6 +1250,78 @@ textarea {
   background-color: rgba(255, 255, 255, 0.25);
 }
 
+body:has(.section-404) {
+  margin: 0;
+  background-color: var(--dark-blue);
+  background-color: #7c70dc;
+  color: #7c70dc;
+}
+
+.section-404 {
+  font-family: "Commodore 64 Pixelized", monospace;
+  height: 100vh;
+  font-size: 2vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.section-404-inner {
+  width: 80vw;
+  height: max-content;
+  margin-inline: 10vw;
+  background-color: #3e32a2;
+  box-sizing: border-box;
+  padding: 1vw;
+}
+.section-404-inner h1 {
+  margin: 0;
+  text-align: center;
+  font-size: 2vw;
+  letter-spacing: 0.35ch;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.section-404-inner pre {
+  font-family: inherit;
+  font-size: 1vw;
+}
+.section-404-inner a {
+  color: var(--light-yellow);
+}
+.section-404-inner a:visited {
+  color: var(--light-yellow);
+}
+.section-404-inner a:hover {
+  color: var(--yellow);
+}
+
+.ascii-block {
+  animation: ascii-blink 0.75s linear infinite;
+}
+
+.pre-center {
+  width: max-content;
+  margin: auto;
+  background-image: var(--grad-lin-1);
+  -webkit-background-clip: text;
+          background-clip: text;
+  background-size: 400% 400%;
+  color: transparent;
+  animation: rotate-background 30s ease-in-out infinite;
+}
+
+@keyframes ascii-blink {
+  from {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @keyframes appear {
   from {
     opacity: 0;
