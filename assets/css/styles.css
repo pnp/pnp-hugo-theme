@@ -8,67 +8,67 @@
   font-family: "Parker";
   font-weight: 100;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-100.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-100.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 150;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-150.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-150.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 250;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-200.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-200.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 300;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-250.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-250.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 200;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-300.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-300.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 400;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-400.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-400.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 600;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-600.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-600.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 700;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-700.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-700.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 800;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-800.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-800.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Parker";
   font-weight: 900;
   font-display: swap;
-  src: url(var(--base-url)fonts/pnp-pd-900.woff2) format("woff2"), local("Segoe Sans");
+  src: url("../fonts/pnp-pd-900.woff2") format("woff2"), local("Segoe Sans");
 }
 @font-face {
   font-family: "Commodore 64 Pixelized";
   font-style: normal;
   font-weight: 400;
-  src: url(var(--base-url)fonts/commodore-64.woff2) format("woff2");
+  src: url("../fonts/commodore-64.woff2") format("woff2");
 }
 .stage {
   overflow: clip;
@@ -142,8 +142,7 @@
   line-height: 0.8;
   text-transform: uppercase;
   text-wrap: pretty;
-  -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   background-image: url("https://assets.codepen.io/83107/250584_M365_CoreAsset_TeamsBkgd_A2.png?width=1920&height=1080&format=auto&fit=cover");
   background-repeat: no-repeat;
   background-size: cover;
@@ -157,8 +156,7 @@
   font-weight: 400;
   line-height: 1.15;
   text-wrap: balanced;
-  -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   background-image: url("https://assets.codepen.io/83107/250584_M365_CoreAsset_TeamsBkgd_A2.png?width=1920&height=1080&format=auto&fit=cover");
   background-repeat: no-repeat;
   background-size: cover;
@@ -304,8 +302,7 @@ textarea {
   line-height: 0.75;
   text-transform: uppercase;
   animation: rotate-background 30s ease-in-out infinite;
-  -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   background-size: 400% 400%;
   color: transparent;
   background-image: var(--grad-lin-1);
@@ -313,8 +310,7 @@ textarea {
 @media screen and (max-width: 1024px) {
   .logo-big {
     font-size: clamp(1rem, 9vw, 10rem);
-    -webkit-background-clip: text;
-            background-clip: text;
+    background-clip: text;
   }
 }
 
@@ -360,8 +356,7 @@ textarea {
   margin-left: 0.5em;
   align-items: center;
   font-size: clamp(1rem, 1.5vw, 1.5rem);
-  -webkit-backdrop-filter: blur(20px) saturate(1.8);
-          backdrop-filter: blur(20px) saturate(1.8);
+  backdrop-filter: blur(20px) saturate(1.8);
   filter: drop-shadow(3px 3px 30px rgba(102, 102, 102, 0.75));
   list-style: none;
   background-color: rgba(255, 252, 248, 0.85);
@@ -527,8 +522,7 @@ textarea {
   border-radius: 1rem;
   grid-template-columns: 4.5rem auto;
   grid-template-rows: auto-fill;
-  -webkit-backdrop-filter: blur(15px);
-          backdrop-filter: blur(15px);
+  backdrop-filter: blur(15px);
   filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.35));
   background-image: linear-gradient(-215deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3)), rgba(255, 255, 255, 0.75);
 }
@@ -651,8 +645,7 @@ textarea {
   aspect-ratio: 16/9;
   grid-template-columns: 4.5rem auto;
   height: 100%;
-  -webkit-backdrop-filter: blur(20px) saturate(190%) brightness(110%);
-          backdrop-filter: blur(20px) saturate(190%) brightness(110%);
+  backdrop-filter: blur(20px) saturate(190%) brightness(110%);
   background-color: rgba(255, 255, 255, 0.75);
   color: black;
   filter: drop-shadow(-10px -10px 0.5em rgba(153, 181, 216, 0.1));
@@ -699,8 +692,7 @@ textarea {
   padding-bottom: 1.5em;
   border-top-left-radius: 1rem;
   border-bottom-left-radius: 1rem;
-  -webkit-backdrop-filter: blur(10px) saturate(120%) brightness(120%);
-          backdrop-filter: blur(10px) saturate(120%) brightness(120%);
+  backdrop-filter: blur(10px) saturate(120%) brightness(120%);
   background-color: rgba(255, 255, 255, 0.8);
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.2));
 }
@@ -941,8 +933,7 @@ textarea {
   grid-template-columns: auto 4.5rem;
   grid-column: 1/span 1;
   height: 100%;
-  -webkit-backdrop-filter: saturate(100%);
-          backdrop-filter: saturate(100%);
+  backdrop-filter: saturate(100%);
 }
 @media screen and (max-width: 1024px) {
   .people {
@@ -965,8 +956,7 @@ textarea {
   grid-column: 1/span 1;
   grid-row: 1;
   justify-content: center;
-  -webkit-backdrop-filter: blur(10px);
-          backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
 }
 @media screen and (max-width: 720px) {
   .people .card-main {
@@ -1082,8 +1072,7 @@ textarea {
   border-radius: 1em;
   grid-column: 1/span 1;
   grid-row: 1/span 3;
-  -webkit-backdrop-filter: blur(10px) saturate(300%);
-          backdrop-filter: blur(10px) saturate(300%);
+  backdrop-filter: blur(10px) saturate(300%);
   background-color: rgba(255, 255, 255, 0.9);
 }
 @media screen and (min-width: 1280px) {
@@ -1299,8 +1288,7 @@ textarea {
   top: 0;
   right: 0;
   left: 0;
-  -webkit-backdrop-filter: blur(10px) saturate(120%);
-          backdrop-filter: blur(10px) saturate(120%);
+  backdrop-filter: blur(10px) saturate(120%);
   background-color: rgba(255, 255, 255, 0.25);
 }
 
@@ -1358,8 +1346,7 @@ body:has(.section-404) {
   width: max-content;
   margin: auto;
   background-image: var(--grad-lin-1);
-  -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   background-size: 400% 400%;
   color: transparent;
   animation: rotate-background 30s ease-in-out infinite;

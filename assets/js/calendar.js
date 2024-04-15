@@ -110,6 +110,11 @@ const updateEvents = () => __awaiter(void 0, void 0, void 0, function* () {
                     // remove the event summary length from the start of the occurrence summary
                     occurrenceSummary = nextOccurrence.summary.slice(event.summary.length);
                     occurrenceSummary = occurrenceSummary.trim();
+                    // If there is a - at the start of the occurrence summary, remove it and trim the string
+                    if (occurrenceSummary.startsWith('-')) {
+                        occurrenceSummary = occurrenceSummary.slice(1);
+                        occurrenceSummary = occurrenceSummary.trim();
+                    }
                 }
             }
             // nextOccurrence is the next occurrence that isn't scheduled before today
