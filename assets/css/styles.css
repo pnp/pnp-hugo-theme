@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @property --rotation-angle {
   syntax: "<angle>";
   inherits: true;
@@ -461,6 +462,43 @@ textarea {
   width: 100%;
 }
 
+.card-status {
+  display: inline-flex;
+  box-sizing: border-box;
+  width: auto;
+  border: 1px black solid;
+  padding: 0.25em 1.25em;
+  border-radius: 1em;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+.card-status.cancelled {
+  color: var(--dark-red);
+  border-color: var(--dark-red);
+}
+.card-status.onhaitus {
+  color: var(--dark-gray);
+  border-color: var(--dark-gray);
+}
+.card-status.live {
+  color: var(--purple);
+  border-color: var(--purple);
+}
+.card-status.live:before {
+  content: "⬤";
+  font-size: 0.9em;
+  display: block;
+  color: var(--red);
+  margin-right: 0.5em;
+}
+.card-status.moved {
+  border-color: var(--dark-green);
+  color: var(--dark-green);
+}
+
 .page-header {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -579,6 +617,17 @@ textarea {
 
 .card.event {
   height: 100%;
+  min-height: 300px;
+  aspect-ratio: unset;
+}
+@media screen and (max-width: 768px) {
+  .card.event {
+    aspect-ratio: unset;
+    max-height: 600px;
+  }
+}
+.card.event .card-main {
+  gap: unset;
 }
 .card.event .card-header {
   color: var(--dark-purple);
@@ -1209,6 +1258,11 @@ textarea {
 @media screen and (max-width: 720px) {
   .section-base {
     background-position: right top, left bottom;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .section-base.event {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 .section-base.team {

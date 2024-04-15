@@ -4,6 +4,15 @@
 
     &.event{
         height: 100%;
+        min-height: 300px;
+        aspect-ratio: unset;
+        @media screen and (max-width: 768px ) {
+            aspect-ratio: unset;
+            max-height: 600px;
+        }
+        .card-main{
+            gap: unset;
+        }
         .card-header{
             color: dt.$dark-purple;
             h1{

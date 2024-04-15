@@ -76,6 +76,13 @@
     @media screen and (max-width: 720px) {
         background-position: right top, left bottom;
     }
+    &.event{
+
+        @media screen and (max-width: 1024px) {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+    }
 
     &.team {
         margin-top: 20vh;

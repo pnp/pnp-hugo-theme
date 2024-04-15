@@ -1,109 +1,188 @@
-class ICALParser {
+import { NextOccurrence, ICalEvent, ICalFeed } from './ICalFeed';
+declare const baseUrl: string;
 
-    private rawData: string;
-    private events: any[];
+const updateEvents = async (): Promise<void> => {
 
-    constructor(icalData: string) {
-        this.rawData = icalData;
-        this.events = [];
-    }
+    const url = new URL('/ical/calendar.json', baseUrl);
+    // console.log('URL:', url.toString());
+    const response = await fetch(url.toString());
+    const ical = await response.json() as ICalFeed;
 
-    parse() {
-        const lines = this.rawData.split(/\r\n|\n|\r/);
-        let currentEvent: any = null;
+    // write the current time in ISO format to the page
+    const currentTime = new Date().toISOString();
+    // console.log("Current time:", currentTime);
 
-        lines.forEach(line => {
-            if (line.startsWith('BEGIN:VEVENT')) {
-                currentEvent = {};
-            } else if (line.startsWith('END:VEVENT')) {
-                this.events.push(currentEvent);
-                currentEvent = null;
-            } else if (currentEvent) {
-                const [key, value] = line.split(':');
-                switch (key) {
-                    case 'SUMMARY':
-                        currentEvent.summary = value;
-                        break;
-                    case 'DTSTART':
-                        currentEvent.dtstart = this.parseDate(value);
-                        break;
-                    case 'DTEND':
-                        currentEvent.dtend = this.parseDate(value);
-                        break;
-                    // Add more cases as per your need
+    //write the time in 1 hour in ISO format to the log
+    const oneHourFromNow = new Date(new Date().getTime() + 60 * 60 * 1000).toISOString();
+    // console.log("One hour from now:", oneHourFromNow);
+
+    const events = ical.events;
+    events.forEach((event: ICalEvent) => {
+
+        const now = new Date();
+        const startTime = new Date(event.startTime);
+        const endTime = new Date(event.endTime);
+
+        // calculate the duration of the event
+        const duration = endTime.getTime() - startTime.getTime();
+
+        // Find the matching .card-main item with an id that matches the event uid
+        const card = document.getElementById(event.uid);
+        if (!card) {
+            console.error('No card found with id:', event.uid);
+
+            // Exit the loop
+            return;
+        }
+
+        if (event.nextOccurrences.length === 0) {
+            return;
+        }
+
+        // Filter the nextOccurrences array to only include occurrences that are scheduled for today or later
+        const futureOccurrences = event.nextOccurrences.filter((occurrence: NextOccurrence) => {
+            const occurrenceStartTime = new Date(occurrence.date);
+            const today = new Date();
+            // Set the time part of now to 00:00:00 to only compare the date part
+            today.setHours(0, 0, 0, 0);
+            return occurrenceStartTime >= today;
+        });
+
+        console.log(event.summary);
+        if (futureOccurrences.length === 0) {
+            console.log('No future occurrences found.');
+            return;
+        }
+
+        // Use the find method to get the first occurrence in the filtered array
+        const nextOccurrence = futureOccurrences.find(() => true);
+
+        if (nextOccurrence) {
+
+            if (window.location.pathname.toLowerCase().endsWith('/test-events/')) {
+                //BEGIN: TESTING
+                // This code will be removed in production
+                if (event.uid === "040000008200E00074C5B7101A82E008000000003DADB286B88DDA01000000000000000010000000CAE180660514504D8FEE060CF40A7A57") {
+                    // Force the PLEASE DELETE ME to be to now
+                    // set the occurrence date to 10 minutes ago
+                    console.log('   Setting the meeting to be 10 minutes ago');
+                    const date = new Date();
+                    date.setMinutes(date.getMinutes() - 10);
+                    nextOccurrence.date = date;
+                } else if (event.uid === "040000008200E00074C5B7101A82E00800000000CE03C195278ADA010000000000000000100000001D5D5DA85E858D45B9A47028FB60C7F2") {
+                    // Force the Viva connections to be cancelled
+                    nextOccurrence.status = "cancelled";
+                    nextOccurrence.summary = "Cancelled - With a reason for cancellation";
+                    console.log('   Setting the status to be cancelled');
+                } else if (event.uid === "040000008200E00074C5B7101A82E00800000000F97F040EAE8EDA01000000000000000010000000214806AD1FEB9B49B9BA5E95BB8A21A0") {
+                    nextOccurrence.status = "moved";
+                    nextOccurrence.summary = event.summary + "Moved - With a reason to move";
+                    console.log('   Setting the status to be moved');
+                } else if (event.uid === "040000008200E00074C5B7101A82E00800000000A1CD2D70268ADA0100000000000000001000000051CB05FE8CA1C74BB006BB017D44378A") {
+                    nextOccurrence.status = "cancelled";
+                    nextOccurrence.summary = event.summary + "On Hiatus - Summer Break 🏖️";
+                    console.log('   Setting the status to on hiatus');
+                } else if (event.uid === "040000008200E00074C5B7101A82E0080000000070404DDB288ADA01000000000000000010000000F485AAF2995C3947AF4B1E87F01384A0") {
+                    // Force the PLEASE DELETE ME to be less than 1 hour away
+                    const comingSoon = new Date(new Date().getTime() + 50 * 60 * 1000);
+                    nextOccurrence.date = comingSoon;
+                    console.log("   Setting the meeting to less than an hour from now")
+                } else if (event.uid === "040000008200E00074C5B7101A82E00800000000C81EAE66288ADA01000000000000000010000000F6C360139C27FF4B8FF87F06B421CDB8") {
+                    // Set the Power Platform Community Call to be today
+                    console.log('   Setting the Power Platform Community Call to be today');
+                    const endOfDay = new Date();
+                    endOfDay.setHours(23, 59, 59, 999);
+                    nextOccurrence.date = endOfDay;
+                } else {
+                    console.log(event.summary);
+                    console.log(event.uid);
+                    console.log('   No special handling for this event');
+
+                }
+                //END: TESTING
+            }
+
+            // Check if the occurrence has an specific message
+            let occurrenceSummary: string | undefined = undefined;
+            if (nextOccurrence.summary && nextOccurrence.summary !== event.summary) {
+
+                // If the next occurrence summary is shorter than the event summary, set the occurrence summary to the next occurrence summary
+                if (nextOccurrence.summary.length < event.summary.length) {
+                    occurrenceSummary = nextOccurrence.summary;
+                } else {
+                    // remove the event summary length from the start of the occurrence summary
+                    occurrenceSummary = nextOccurrence.summary.slice(event.summary.length);
+                    occurrenceSummary = occurrenceSummary.trim();
                 }
             }
-        });
-    }
 
-    parseDate(dateStr: string): Date {
-        // Basic date parsing, consider time zones and formats for production code
-        const year = parseInt(dateStr.substr(0, 4));
-        const month = parseInt(dateStr.substr(4, 2)) - 1; // JS months are 0-indexed
-        const day = parseInt(dateStr.substr(6, 2));
-        return new Date(year, month, day);
-    }
-
-    getEvents(): any[] {
-        return this.events;
-    }
-}
+            // nextOccurrence is the next occurrence that isn't scheduled before today
+            // You can add your code here to handle nextOccurrence
+            const occurrenceStartTime = new Date(nextOccurrence.date);
+            // console.log(event.summary, nextOccurrence.status)
 
 
+            if (nextOccurrence.status === "cancelled") {
+                if (occurrenceSummary && (occurrenceSummary.toLowerCase().startsWith('hiatus') || occurrenceSummary.toLowerCase().startsWith('on hiatus'))) {
+                    const statusMessage = occurrenceSummary ? `${occurrenceSummary}` : 'On Hiatus';
+                    setCardStatus(card, 'hiatus', statusMessage);
+                } else {
+                    // console.log('The event has been cancelled.');
+                    const statusMessage = occurrenceSummary ? occurrenceSummary : 'Cancelled';
+                    setCardStatus(card, 'cancelled', statusMessage);
+                }
 
-async function fetchAndParseICS(url: string): Promise<void> {
-    const response = await fetch(url);
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
+                return;
+            }
 
-    const data = await response.text();
-    
-    const parser = new ICALParser(data);
-    parser.parse();
-    console.log(parser.getEvents());
-   
+            const oneHourFromNow = new Date(now.getTime() + 60 * 60 * 1000);
 
-    // return events.map((eventComp: any) => {
-    //     const event = new ICAL.Event(eventComp);
-    //     return {
-    //         summary: event.summary,
-    //         start: event.startDate.toJSDate(),
-    //         end: event.endDate.toJSDate(),
-    //     };
-    // });
-}
+            // Check if the event is 1 hour away
+            if (oneHourFromNow >= occurrenceStartTime && now < occurrenceStartTime && nextOccurrence.status === "scheduled") {
+                console.log('       The event is starting soon.');
+                setCardStatus(card, 'soon', 'Starting soon 🕐');
+                return;
+            }
 
-function displayEvents(events: any[]): void {
-    const eventsContainer = document.getElementById('events-container');
-    if (!eventsContainer) return;
+            // calculate the occurrence end time by adding the duration to the start time
+            const occurrenceEndTime = new Date(occurrenceStartTime.getTime() + duration);
 
-    eventsContainer.innerHTML = '';
+            // Check if the event is currently happening
+            if (now >= occurrenceStartTime && now <= occurrenceEndTime) {
+                console.log('       The event is currently happening.');
 
-    events.forEach(event => {
-        const eventElement = document.createElement('div');
-        eventElement.className = 'event';
+                // Find the div within the card that has the class .card-status
+                setCardStatus(card, 'live', 'Live');
+                return;
+            }
 
-        const title = document.createElement('h3');
-        title.textContent = event.summary;
+            // Create a Date object for the end of the day
+            const nextOccurrenceDate = new Date(nextOccurrence.date);
+            if (nextOccurrenceDate.toDateString() === now.toDateString()) {
+                console.log('       The event starts today.');
+                setCardStatus(card, 'today', "Today 📆");
+                return;
+            }
 
-        const when = document.createElement('p');
-        when.textContent = `Start: ${event.start} - End: ${event.end}`;
+            if (nextOccurrence.status === "moved") {
+                // Find the div within the card that has the class .card-status
+                const statusMessage = occurrenceSummary ? occurrenceSummary : 'Moved';
+                setCardStatus(card, 'moved', statusMessage);
+                return;
+            }
 
-        eventElement.appendChild(title);
-        eventElement.appendChild(when);
-
-        eventsContainer.appendChild(eventElement);
+        }
     });
+};
+
+// Call the function when the page loads
+window.addEventListener('DOMContentLoaded', updateEvents);
+
+function setCardStatus(card: HTMLElement, statusClass: string, statusText: string) {
+    const status = card?.querySelector('.card-status-outer');
+
+    // Add the following HTML
+    if (status) {
+        status.innerHTML = `<div class="card-status ${statusClass}">${statusText}</div>`;
+    }
 }
-
-
-const icsUrl = 'https://outlook.office365.com/owa/calendar/c80c26982a604d3e89b403a318e7a477@officedevpnp.onmicrosoft.com/ca3a6fcd2d944eedb7f87d13bea580af13174372598351020792/calendar.ics'; // Replace with your .ics file URL
-
-
-fetchAndParseICS(icsUrl);
-    // .then(displayEvents)
-    // .catch(error => console.error('Error loading calendar:', error));
-
-
-    
