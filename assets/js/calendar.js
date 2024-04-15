@@ -7,9 +7,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+const baseUrl = window.baseUrl;
 const updateEvents = () => __awaiter(void 0, void 0, void 0, function* () {
-    const url = new URL('/ical/calendar.json', baseUrl);
-    // console.log('URL:', url.toString());
+    const url = new URL('./ical/calendar.json', baseUrl);
+    console.log('URL:', url.toString());
     const response = yield fetch(url.toString());
     const ical = yield response.json();
     // write the current time in ISO format to the page

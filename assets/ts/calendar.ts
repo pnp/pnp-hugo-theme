@@ -1,10 +1,16 @@
 import { NextOccurrence, ICalEvent, ICalFeed } from './ICalFeed';
-declare const baseUrl: string;
+declare global {
+    interface Window {
+        baseUrl: string;
+    }
+}
 
+const baseUrl = window.baseUrl;
 const updateEvents = async (): Promise<void> => {
 
-    const url = new URL('/ical/calendar.json', baseUrl);
-    // console.log('URL:', url.toString());
+    const url = new URL('./ical/calendar.json', baseUrl);
+    
+    console.log('URL:', url.toString());
     const response = await fetch(url.toString());
     const ical = await response.json() as ICalFeed;
 

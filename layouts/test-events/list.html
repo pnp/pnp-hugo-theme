@@ -3,7 +3,7 @@
     <div class="section-inner">
         <header class="section-header">
             <h1>Microsoft 365 &amp; Power Platform Community Calls</h1>
-            <p>This is a test.</p><p>The events are fed live from the ical, but the status are fake. If you update the ical and refresh the page (after you run the <a href="https://github.com/pnp/pnp.github.io/actions/workflows/update-ics.yaml">Update Calendar File</a> workflow action in GitHub -- or wait one hour), the
+            <p>This is a test. This page won't be in production.</p><p>The events are fed live from the ical, but the status are fake. If you update the ical and refresh the page (after you run the <a href="https://github.com/pnp/pnp.github.io/actions/workflows/update-ics.yaml">Update Calendar File</a> workflow action in GitHub -- or wait one hour), the
                 changes to events should be reflected here.</p>
         </header>
         <menu class="section-grid" id="events-container">
@@ -17,8 +17,8 @@
     </div>
 </section>
 {{ $js := resources.Get "js/calendar.js" }}
-<script>
+{{ "<script>" | safeHTML }}
     window.baseUrl = '{{ .Site.BaseURL }}';
-</script>
+{{ "</script>" | safeHTML }}
 <script type="module" src="{{ $js.Permalink }}"></script>
 {{ end }}
