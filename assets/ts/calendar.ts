@@ -120,7 +120,7 @@ function updateEventStatus(event: ICalEvent, card: HTMLElement, futureOccurrence
             setCardStatus(card, 'live', 'Live');
         } else if (getTimeOneHourFromNow() >= occurrenceStartTime && now < occurrenceStartTime && occurrence.status === "scheduled") {
             console.log('Event is starting soon.');
-            setCardStatus(card, 'soon', 'Starting soon ⌛');
+            setCardStatus(card, 'soon', 'Starting soon');
         } else if (occurrenceStartTime.toDateString() === now.toDateString()) {
             console.log('Event starts today.');
             setCardStatus(card, 'today', 'Today 📆');
@@ -229,9 +229,7 @@ function generateCalendar(events: ICalEvent[]): void {
                 // Sort the events for the day by date
                 eventsForTheDay.sort((a, b) => a.date.getTime() - b.date.getTime());
 
-                if (eventsForTheDay.length === 0) {
-                    menuElem.innerText = 'No events';
-                } else {
+ 
                     // Render the events for the day
                     eventsForTheDay.forEach(event => {
                         const liElem: HTMLLIElement = document.createElement('li');
@@ -261,7 +259,6 @@ function generateCalendar(events: ICalEvent[]): void {
 
                         menuElem.appendChild(liElem);
                     });
-                }
 
 
                 calendarContainer.appendChild(liElem);

@@ -118,7 +118,7 @@ function updateEventStatus(event, card, futureOccurrences, now, duration) {
         }
         else if (getTimeOneHourFromNow() >= occurrenceStartTime && now < occurrenceStartTime && occurrence.status === "scheduled") {
             console.log('Event is starting soon.');
-            setCardStatus(card, 'soon', 'Starting soon ⌛');
+            setCardStatus(card, 'soon', 'Starting soon');
         }
         else if (occurrenceStartTime.toDateString() === now.toDateString()) {
             console.log('Event starts today.');
@@ -208,34 +208,29 @@ function generateCalendar(events) {
                 });
                 // Sort the events for the day by date
                 eventsForTheDay.sort((a, b) => a.date.getTime() - b.date.getTime());
-                if (eventsForTheDay.length === 0) {
-                    menuElem.innerText = 'No events';
-                }
-                else {
-                    // Render the events for the day
-                    eventsForTheDay.forEach(event => {
-                        const liElem = document.createElement('li');
-                        liElem.id = event.uid;
-                        const divElem = document.createElement('div');
-                        divElem.className = 'event-details';
-                        const timeElem = document.createElement('time');
-                        timeElem.className = 'event-start';
-                        let formattedTime = event.date.toLocaleTimeString(navigator.language, { hour: 'numeric', minute: 'numeric' });
-                        timeElem.textContent = formattedTime;
-                        timeElem.setAttribute('datetime', event.date.toISOString());
-                        const h3Elem = document.createElement('h3');
-                        h3Elem.className = 'event-title';
-                        h3Elem.textContent = event.summary;
-                        const divStatusOuterElem = document.createElement('div');
-                        divStatusOuterElem.className = 'card-status-outer';
-                        // Append elements
-                        divElem.appendChild(timeElem);
-                        divElem.appendChild(h3Elem);
-                        divElem.appendChild(divStatusOuterElem);
-                        liElem.appendChild(divElem);
-                        menuElem.appendChild(liElem);
-                    });
-                }
+                // Render the events for the day
+                eventsForTheDay.forEach(event => {
+                    const liElem = document.createElement('li');
+                    liElem.id = event.uid;
+                    const divElem = document.createElement('div');
+                    divElem.className = 'event-details';
+                    const timeElem = document.createElement('time');
+                    timeElem.className = 'event-start';
+                    let formattedTime = event.date.toLocaleTimeString(navigator.language, { hour: 'numeric', minute: 'numeric' });
+                    timeElem.textContent = formattedTime;
+                    timeElem.setAttribute('datetime', event.date.toISOString());
+                    const h3Elem = document.createElement('h3');
+                    h3Elem.className = 'event-title';
+                    h3Elem.textContent = event.summary;
+                    const divStatusOuterElem = document.createElement('div');
+                    divStatusOuterElem.className = 'card-status-outer';
+                    // Append elements
+                    divElem.appendChild(timeElem);
+                    divElem.appendChild(h3Elem);
+                    divElem.appendChild(divStatusOuterElem);
+                    liElem.appendChild(divElem);
+                    menuElem.appendChild(liElem);
+                });
                 calendarContainer.appendChild(liElem);
             }
             // Move to the next day
