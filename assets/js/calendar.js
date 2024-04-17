@@ -160,25 +160,37 @@ function generateCalendar(events) {
         offset = 6; // If today is Sunday, set offset to 6
     // Subtract the offset from the current date to get this Monday
     thisMonday.setUTCDate(thisMonday.getUTCDate() - offset);
-    const calendarContainer = document.querySelector('.calendar');
+    const calendarContainer = document.getElementById('calendar-container');
     if (calendarContainer) {
         calendarContainer.innerHTML = ''; // Clear previous entries
         for (let i = 0; i < 12; i++) { // Generate for 12 days (for demonstration)
             // Skip weekends
             if (thisMonday.getUTCDay() !== 0 && thisMonday.getUTCDay() !== 6) {
-                const dayElem = document.createElement('div');
-                dayElem.className = 'date';
-                // Use UTC date for attributes to ensure consistency
-                dayElem.setAttribute('data-date', thisMonday.toISOString().split('T')[0]);
-                // Header creation remains unchanged
+                const liElem = document.createElement('li');
+                const articleElem = document.createElement('article');
+                articleElem.className = 'card upcoming';
+                const divElem = document.createElement('div');
+                divElem.className = 'upcoming-content';
                 const headerElem = document.createElement('header');
-                headerElem.className = 'card-header';
-                const h1Elem = document.createElement('h1');
-                h1Elem.textContent = thisMonday.getUTCDate().toString(); // UTC date for display
-                const dayNameElem = document.createTextNode(thisMonday.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' }));
-                headerElem.appendChild(h1Elem);
-                headerElem.appendChild(dayNameElem);
-                dayElem.appendChild(headerElem);
+                headerElem.className = 'card-upcoming-title';
+                const timeElem = document.createElement('time');
+                timeElem.setAttribute('datetime', thisMonday.toISOString());
+                const dayElem = document.createElement('div');
+                dayElem.className = 'day';
+                dayElem.textContent = thisMonday.getUTCDate().toString(); // UTC date for display
+                const weekdayElem = document.createElement('div');
+                weekdayElem.className = 'weekday';
+                weekdayElem.textContent = thisMonday.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+                const menuElem = document.createElement('menu');
+                menuElem.className = 'upcoming-list';
+                // Append elements
+                timeElem.appendChild(dayElem);
+                timeElem.appendChild(weekdayElem);
+                headerElem.appendChild(timeElem);
+                divElem.appendChild(headerElem);
+                divElem.appendChild(menuElem);
+                articleElem.appendChild(divElem);
+                liElem.appendChild(articleElem);
                 // Processing events
                 let eventsForTheDay = [];
                 events.forEach(event => {
@@ -196,22 +208,38 @@ function generateCalendar(events) {
                 });
                 // Sort the events for the day by date
                 eventsForTheDay.sort((a, b) => a.date.getTime() - b.date.getTime());
-                // Render the events for the day
-                eventsForTheDay.forEach(event => {
-                    const eventElem = document.createElement('div');
-                    eventElem.id = event.uid;
-                    eventElem.className = 'card-hor';
-                    eventElem.innerHTML = `<h2 class="sample-headline" title="${event.summary}">${event.summary}</h2>`;
-                    let formattedTime = event.date.toLocaleTimeString(navigator.language, { hour: 'numeric', minute: 'numeric', timeZone: 'UTC' });
-                    let timeElem = document.createElement('time');
-                    timeElem.textContent = formattedTime;
-                    timeElem.setAttribute('datetime', event.date.toISOString());
-                    eventElem.appendChild(timeElem);
-                    dayElem.appendChild(eventElem);
-                });
-                calendarContainer.appendChild(dayElem);
+                if (eventsForTheDay.length === 0) {
+                    menuElem.innerText = 'No events';
+                }
+                else {
+                    // Render the events for the day
+                    eventsForTheDay.forEach(event => {
+                        const liElem = document.createElement('li');
+                        liElem.id = event.uid;
+                        const divElem = document.createElement('div');
+                        divElem.className = 'event-details';
+                        const timeElem = document.createElement('time');
+                        timeElem.className = 'event-start';
+                        let formattedTime = event.date.toLocaleTimeString(navigator.language, { hour: 'numeric', minute: 'numeric' });
+                        timeElem.textContent = formattedTime;
+                        timeElem.setAttribute('datetime', event.date.toISOString());
+                        const h3Elem = document.createElement('h3');
+                        h3Elem.className = 'event-title';
+                        h3Elem.textContent = event.summary;
+                        const divStatusOuterElem = document.createElement('div');
+                        divStatusOuterElem.className = 'card-status-outer';
+                        // Append elements
+                        divElem.appendChild(timeElem);
+                        divElem.appendChild(h3Elem);
+                        divElem.appendChild(divStatusOuterElem);
+                        liElem.appendChild(divElem);
+                        menuElem.appendChild(liElem);
+                    });
+                }
+                calendarContainer.appendChild(liElem);
             }
-            thisMonday.setUTCDate(thisMonday.getUTCDate() + 1); // Increment date in UTC
+            // Move to the next day
+            thisMonday.setUTCDate(thisMonday.getUTCDate() + 1);
         }
     }
 }

@@ -23,8 +23,7 @@
   line-height: 0.85;
   text-transform: uppercase;
   animation: rotate-background 60s ease-in-out infinite;
-  -webkit-background-clip: text;
-          background-clip: text;
+  background-clip: text;
   background-image: linear-gradient(var(--rotation-angle), var(--yellow), var(--orange), var(--red), var(--magenta), var(--purple), var(--blue), var(--teal), var(--green));
   background-repeat: no-repeat;
   background-size: 100% 100%;

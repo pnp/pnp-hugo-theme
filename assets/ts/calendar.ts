@@ -54,7 +54,7 @@ function filterFutureOccurrences(occurrences: NextOccurrence[], now: Date): Next
     });
 }
 
-function updateEventStatus(event: ICalEvent, card: HTMLElement, futureOccurrences: NextOccurrence[], now: Date, duration:number): void {
+function updateEventStatus(event: ICalEvent, card: HTMLElement, futureOccurrences: NextOccurrence[], now: Date, duration: number): void {
     // Example of updating DOM elements based on the event data
     futureOccurrences.forEach(occurrence => {
         if (!occurrence) {
@@ -166,7 +166,7 @@ function generateCalendar(events: ICalEvent[]): void {
     // Subtract the offset from the current date to get this Monday
     thisMonday.setUTCDate(thisMonday.getUTCDate() - offset);
 
-    const calendarContainer: HTMLElement | null = document.querySelector('.calendar');
+    const calendarContainer: HTMLElement | null = document.getElementById('calendar-container');
     if (calendarContainer) {
         calendarContainer.innerHTML = ''; // Clear previous entries
 
@@ -174,27 +174,42 @@ function generateCalendar(events: ICalEvent[]): void {
 
             // Skip weekends
             if (thisMonday.getUTCDay() !== 0 && thisMonday.getUTCDay() !== 6) {
-                const dayElem: HTMLDivElement = document.createElement('div');
-                dayElem.className = 'date';
+                const liElem: HTMLLIElement = document.createElement('li');
 
-                // Use UTC date for attributes to ensure consistency
-                dayElem.setAttribute('data-date', thisMonday.toISOString().split('T')[0]);
+                const articleElem: HTMLElement = document.createElement('article');
+                articleElem.className = 'card upcoming';
 
-                // Header creation remains unchanged
+                const divElem: HTMLDivElement = document.createElement('div');
+                divElem.className = 'upcoming-content';
+
                 const headerElem: HTMLElement = document.createElement('header');
-                headerElem.className = 'card-header';
+                headerElem.className = 'card-upcoming-title';
 
-                const h1Elem: HTMLHeadingElement = document.createElement('h1');
-                h1Elem.textContent = thisMonday.getUTCDate().toString(); // UTC date for display
+                const timeElem: HTMLTimeElement = document.createElement('time');
+                timeElem.setAttribute('datetime', thisMonday.toISOString());
 
-                const dayNameElem: Text = document.createTextNode(thisMonday.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' }));
+                const dayElem: HTMLDivElement = document.createElement('div');
+                dayElem.className = 'day';
+                dayElem.textContent = thisMonday.getUTCDate().toString(); // UTC date for display
 
-                headerElem.appendChild(h1Elem);
-                headerElem.appendChild(dayNameElem);
-                dayElem.appendChild(headerElem);
+                const weekdayElem: HTMLDivElement = document.createElement('div');
+                weekdayElem.className = 'weekday';
+                weekdayElem.textContent = thisMonday.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+
+                const menuElem: HTMLMenuElement = document.createElement('menu');
+                menuElem.className = 'upcoming-list';
+
+                // Append elements
+                timeElem.appendChild(dayElem);
+                timeElem.appendChild(weekdayElem);
+                headerElem.appendChild(timeElem);
+                divElem.appendChild(headerElem);
+                divElem.appendChild(menuElem);
+                articleElem.appendChild(divElem);
+                liElem.appendChild(articleElem);
 
                 // Processing events
-                let eventsForTheDay: {uid: string, summary: string, date: Date}[] = [];
+                let eventsForTheDay: { uid: string, summary: string, date: Date }[] = [];
 
                 events.forEach(event => {
                     event.nextOccurrences.forEach(occurrence => {
@@ -214,27 +229,49 @@ function generateCalendar(events: ICalEvent[]): void {
                 // Sort the events for the day by date
                 eventsForTheDay.sort((a, b) => a.date.getTime() - b.date.getTime());
 
-                // Render the events for the day
-                eventsForTheDay.forEach(event => {
-                    const eventElem: HTMLDivElement = document.createElement('div');
-                    eventElem.id = event.uid;
-                    eventElem.className = 'card-hor';
-                    eventElem.innerHTML = `<h2 class="sample-headline" title="${event.summary}">${event.summary}</h2>`;
-                    let formattedTime: string = event.date.toLocaleTimeString(navigator.language, { hour: 'numeric', minute: 'numeric', timeZone: 'UTC' });
-                    let timeElem: HTMLTimeElement = document.createElement('time');
-                    timeElem.textContent = formattedTime;
-                    timeElem.setAttribute('datetime', event.date.toISOString());
-                    eventElem.appendChild(timeElem);
-                    dayElem.appendChild(eventElem);
-                });
+                if (eventsForTheDay.length === 0) {
+                    menuElem.innerText = 'No events';
+                } else {
+                    // Render the events for the day
+                    eventsForTheDay.forEach(event => {
+                        const liElem: HTMLLIElement = document.createElement('li');
+                        liElem.id = event.uid;
 
-                calendarContainer.appendChild(dayElem);
+                        const divElem: HTMLDivElement = document.createElement('div');
+                        divElem.className = 'event-details';
+
+                        const timeElem: HTMLTimeElement = document.createElement('time');
+                        timeElem.className = 'event-start';
+                        let formattedTime: string = event.date.toLocaleTimeString(navigator.language, { hour: 'numeric', minute: 'numeric' });
+                        timeElem.textContent = formattedTime;
+                        timeElem.setAttribute('datetime', event.date.toISOString());
+
+                        const h3Elem: HTMLHeadingElement = document.createElement('h3');
+                        h3Elem.className = 'event-title';
+                        h3Elem.textContent = event.summary;
+
+                        const divStatusOuterElem: HTMLDivElement = document.createElement('div');
+                        divStatusOuterElem.className = 'card-status-outer';
+
+                        // Append elements
+                        divElem.appendChild(timeElem);
+                        divElem.appendChild(h3Elem);
+                        divElem.appendChild(divStatusOuterElem);
+                        liElem.appendChild(divElem);
+
+                        menuElem.appendChild(liElem);
+                    });
+                }
+
+
+                calendarContainer.appendChild(liElem);
             }
-            thisMonday.setUTCDate(thisMonday.getUTCDate() + 1); // Increment date in UTC
+
+            // Move to the next day
+            thisMonday.setUTCDate(thisMonday.getUTCDate() + 1);
         }
     }
 }
-
 
 
 function extractOccurrenceSummary(nextOccurrenceSummary: string | undefined, eventSummary: string): string | undefined {

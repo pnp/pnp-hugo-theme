@@ -111,4 +111,11 @@
             }
         }
     }
+
+    &.upcoming{
+        .section-grid{
+            grid-template-columns: repeat(5, 1fr);
+            gap: clamp(1rem, 2vw, 4rem);
+        }
+    }
 }

@@ -1,86 +1,13 @@
 {{ define "main" }}
-<style>
 
-.calendar {
-  display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-    grid-template-rows: 1fr min-content;
-gap: 1em;
-}
-
-
-
-.day, .date {
-  padding: 1em;
-  text-align: center;
-  padding-top: 1.5em;
-    padding-bottom: 1.5em;
-    border-radius: 1rem;
-    border-radius: 1rem;
-    backdrop-filter: blur(20px) saturate(190%) brightness(110%);
-    background-color: rgba(255, 255, 255, 0.75);
-    color: black;
-    filter: drop-shadow(-10px -10px 0.5em rgba(153, 181, 216, 0.1));
-    filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.35));
-    background-color: rgba(255, 255, 255, 0);
-}
-
-.date::after {
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    border-radius: 1rem;
-    content: " ";
-    background-image: linear-gradient(-215deg, rgba(255, 255, 255, 0) 50%, rgba(255, 255, 255, 0.3));
-}
-
-.date .card-header {
-    text-align: left;
-    padding-bottom: 8px;
-}
-.date .card-header h1 {
-    height: 0.25em;
-    text-align: left;
-}
-
-.date .card-hor { 
-    border-radius: 0 0 0 0;
-    margin-bottom: 1em;
-    text-align: left;
-}
-
-.card-hor:hover {
-    position: relative;
-    z-index: 10;
-    transform: translate(5px, 5px) scale(1.05);
-    cursor: pointer;
-}
-@media (max-width: 600px) {
-  .day, .date {
-    padding: 0.5em;
-  }
-}
-
-
-.today {
-    backdrop-filter: blur(20px) saturate(190%) brightness(110%);
-    background-color: rgba(255, 255, 255, 0.75);
-    color: black;
-
-}
-
-</style>
-<section class="section-base community" id="community">
+<section class="section-base upcoming" id="upcoming">
     <div class="section-inner">
         <header class="section-header">
             <h1>{{.Title  }}</h1>
             {{ .Content }}
         </header>
-        <menu class="" id="calendar-container">
-            <div class="calendar"></div>
+        <menu class="section-grid" id="calendar-container">
+
         </menu>
     </div>
 </section>
