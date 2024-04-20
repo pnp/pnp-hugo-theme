@@ -153,6 +153,7 @@ function updateEvents() {
 function generateCalendar(events) {
     const today = new Date();
     let thisMonday = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+    const firstMonday = thisMonday;
     // Calculate the day of the week (0 for Sunday, 1 for Monday, etc.) in UTC
     let dayOfWeek = today.getUTCDay();
     let offset = dayOfWeek - 1; // Calculate the offset to get to Monday

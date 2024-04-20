@@ -20,9 +20,3 @@
     {{- end }}
 </div>
 </section>
-
-{{ "<script>" | safeHTML }}
-    window.baseUrl = '{{ .Site.BaseURL }}';
-{{ "</script>" | safeHTML }}
-{{ $js := resources.Get "js/calendar.js" }}
-<script type="module" src="{{ $js.Permalink }}"></script>

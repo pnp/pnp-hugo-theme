@@ -157,6 +157,7 @@ async function updateEvents(): Promise<void> {
 function generateCalendar(events: ICalEvent[]): void {
     const today: Date = new Date();
     let thisMonday: Date = new Date(Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate()));
+    const firstMonday = thisMonday;
 
     // Calculate the day of the week (0 for Sunday, 1 for Monday, etc.) in UTC
     let dayOfWeek: number = today.getUTCDay();
