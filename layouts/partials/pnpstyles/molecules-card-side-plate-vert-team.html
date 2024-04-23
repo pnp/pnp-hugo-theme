@@ -8,5 +8,23 @@
 {{ if .twitter }}
 {{ $links = $links | append (dict "url" .twitter "iconName" "icon-twitter" "ariaHidden" true "title" "Follow on Twitter") }}
 {{ end }}
-
+{{ "<script type='application/ld+json'>" | safeHTML }}
+{{ "{" | safeHTML }}
+            "@context": "https://schema.org",
+            "@type": "Person",
+            "name": "{{ .name }}",
+            {{- with .img }}
+            "image": [
+            "{{ . | absURL }}"
+            ],
+            {{ end }}
+            "jobTitle": "{{ .title }}",
+            "worksFor": "{{ .company }}",
+            "sameAs": [
+    {{ range $i, $link := $links }}
+    "{{ $link.url }}"{{ if ne $i (sub (len $links) 1) }},{{ end }}
+    {{ end }}
+]
+{{ "}" | safeHTML }}
+{{ "</script>" | safeHTML }}
 {{ partial "pnpstyles/molecules-card-side-plate-vert" (dict "links" $links) }}

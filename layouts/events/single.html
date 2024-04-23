@@ -15,8 +15,5 @@
 
     {{ $section := .Site.GetPage "section" "events" }}
     {{ $events := $section.Pages }}
-    {{ range $events -}}
-    {{- partial "event-schema" . -}}
-    {{- end }}
 </div>
 </section>

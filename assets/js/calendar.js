@@ -193,11 +193,19 @@ function generateCalendar(events) {
                     event.nextOccurrences.forEach(occurrence => {
                         let occurrenceDate = new Date(occurrence.date);
                         let formattedDate = occurrenceDate.toISOString().split('T')[0];
+                        let eventNormalStartDate = new Date(event.startTime);
+                        let eventNormalEndDate = new Date(event.endTime);
+                        let eventDuration = calculateDuration(eventNormalStartDate, eventNormalEndDate);
+                        // Calculate the endDate for the occurrence based on the duration of the event
+                        let occurrenceEndDate = new Date(occurrenceDate.getTime() + eventDuration);
                         if (formattedDate === thisMonday.toISOString().split('T')[0]) {
                             eventsForTheDay.push({
                                 uid: event.uid,
                                 summary: event.summary,
-                                date: occurrenceDate
+                                date: occurrenceDate,
+                                endDate: occurrenceEndDate,
+                                joinUrl: event.joinUrl,
+                                status: occurrence.status
                             });
                         }
                     });
@@ -220,10 +228,34 @@ function generateCalendar(events) {
                     h3Elem.textContent = event.summary;
                     const divStatusOuterElem = document.createElement('div');
                     divStatusOuterElem.className = 'card-status-outer';
+                    // Create script element for structured data
+                    const scriptElem = document.createElement('script');
+                    scriptElem.type = 'application/ld+json';
+                    const structuredData = {
+                        "@context": "https://schema.org",
+                        "@type": "Event",
+                        "name": event.summary,
+                        "startDate": event.date.toISOString(),
+                        "endDate": event.endDate.toISOString(),
+                        "eventStatus": event.status === "moved" ? "https://schema.org/EventRescheduled" : event.status === "cancelled" ? "https://schema.org/EventCancelled" : "https://schema.org/EventScheduled",
+                        "eventAttendanceMode": "https://schema.org/OnlineEventAttendanceMode",
+                        "location": {
+                            "@type": "VirtualLocation",
+                            "url": event.joinUrl
+                        },
+                        "organizer": {
+                            "@type": "Organization",
+                            "name": "Microsoft 365 & Power Platform Community",
+                            "url": "https://pnp.github.io"
+                        }
+                        // Add other properties as needed
+                    };
+                    scriptElem.textContent = JSON.stringify(structuredData);
                     // Append elements
                     divElem.appendChild(timeElem);
                     divElem.appendChild(h3Elem);
                     divElem.appendChild(divStatusOuterElem);
+                    divElem.appendChild(scriptElem); // Append script element to liElem
                     liElem.appendChild(divElem);
                     menuElem.appendChild(liElem);
                 });
