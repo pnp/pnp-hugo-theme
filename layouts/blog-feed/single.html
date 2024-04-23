@@ -20,5 +20,5 @@
     window.rssFeedUrl = 'https://pnp.github.io/blog/index.xml';
 </script>
 {{ $js := resources.Get "js/blog-feed.js" }}
-{{ $js = $js | resources.Minify | resources.Fingerprint }}
+{{ $js = $js | resources.Minify }}
 <script src="{{ $js.Permalink }}"></script>

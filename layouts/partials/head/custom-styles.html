@@ -3,9 +3,8 @@
 {{ $styles := resources.Get . }}
 <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 {{ else }}
-{{ $styles := resources.Get . | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}"
-    crossorigin="anonymous" media="screen" />
+{{ $styles := resources.Get . | minify }}
+<link rel="stylesheet" href="{{ $styles.Permalink }}" crossorigin="anonymous" media="screen" />
 {{ end }}
 {{ end }}
 
@@ -16,8 +15,7 @@
 {{ $styles := resources.Get . | toCSS $cssOpts }}
 <link rel="stylesheet" href="{{ $styles.Permalink }}" media="screen">
 {{ else }}
-{{ $styles := resources.Get . | toCSS | minify | fingerprint }}
-<link rel="stylesheet" href="{{ $styles.Permalink }}" integrity="{{ $styles.Data.Integrity }}"
-    crossorigin="anonymous" media="screen" />
+{{ $styles := resources.Get . | toCSS | minify }}
+<link rel="stylesheet" href="{{ $styles.Permalink }}" crossorigin="anonymous" media="screen" />
 {{ end }}
 {{ end }}
