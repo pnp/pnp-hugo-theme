@@ -13,7 +13,7 @@
 
     grid-template-columns: repeat(3, minmax(0, 1fr));
     grid-template-rows: 1fr min-content;
-    gap: clamp(1rem, 4vw, 5rem);
+    gap: clamp(2rem, 4vw, 5rem);
 
     transition: all .125s ease-in-out;
 

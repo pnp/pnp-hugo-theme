@@ -3,11 +3,17 @@
 .site-logo{
     padding-block: 1em;
 
-    font-size: clamp(1rem, 1.75vw, 1.25rem);
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
     font-weight: 700;
-    line-height: 0.85;
+    line-height: 0.9;
 
     color: dt.$dark-blue;
+    .ff-pp{
+        font-size: clamp(1rem, 1.55vw, 1.20rem);
+    }
+    .ff-com{
+        font-size: clamp(1rem, 1.55vw, 1.35rem);
+    }
 }
 
 .site-logo-link{

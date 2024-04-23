@@ -20,7 +20,7 @@
     display: flex;
     align-items: center;
     margin-top: 6rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     gap: 2rem;
     @media screen and (max-width: 480px) {
         flex-direction: column;
@@ -34,16 +34,11 @@
     justify-content: center;
     align-items: center;
 }
-.comic-text{
-    isolation: isolate;
-    transform: skewY(-5deg);
-    line-height: 0.85;
-    font-weight: bold;
-    font-style: italic;
-    font-family: 'Comic Sans MS';
-}
 
 .parker{
-    height: 6rem;
-    transform: skewY(3deg);
+    height: 4rem;
+    image{
+        width: 100%;
+        height: inherit;
+    }
 }

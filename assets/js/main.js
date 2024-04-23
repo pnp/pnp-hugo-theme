@@ -1,6 +1,7 @@
 "use strict";
 const hamburgerMenu = document.querySelector('.hamburger');
 const menuPrimary = document.querySelector('.nav-menu.primary');
+const navLinks = document.querySelectorAll('.nav-link');
 const showMenu = (_evt) => {
     if (hamburgerMenu) {
         hamburgerMenu.classList.toggle('show');
@@ -23,3 +24,10 @@ const showMenu = (_evt) => {
 if (hamburgerMenu && menuPrimary) {
     hamburgerMenu.addEventListener('click', showMenu);
 }
+navLinks.forEach((navLink) => {
+    navLink.addEventListener('click', (evt) => {
+        if (hamburgerMenu && hamburgerMenu.classList.contains('show')) {
+            showMenu(evt);
+        }
+    });
+});

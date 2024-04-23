@@ -29,8 +29,11 @@
     }
 
     &:hover {
-        transform: translate(10px, 10px) scale(1.1);
-
+        
+        @media screen and (min-width: 480px) {
+            transform: translate(10px, 10px) scale(1.1);    
+        }
+        
         .sample-media-img {
             opacity: 1;
         }
