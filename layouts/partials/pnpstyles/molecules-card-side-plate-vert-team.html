@@ -10,21 +10,21 @@
 {{ end }}
 {{ "<script type='application/ld+json'>" | safeHTML }}
 {{ "{" | safeHTML }}
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "{{ .name }}",
-            {{- with .img }}
-            "image": [
-            "{{ . | absURL }}"
-            ],
-            {{ end }}
-            "jobTitle": "{{ .title }}",
-            "worksFor": "{{ .company }}",
-            "sameAs": [
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "{{ .name }}",
+    {{ with .img -}}
+    "image": [ 
+        "{{ . | absURL }}" 
+    ],
+    {{- end }}
+    "jobTitle": "{{ .title }}",
+    "worksFor": "{{ .company }}",
+    "sameAs": [
     {{ range $i, $link := $links }}
-    "{{ $link.url }}"{{ if ne $i (sub (len $links) 1) }},{{ end }}
-    {{ end }}
-]
+        "{{ $link.url }}"{{ if ne $i (sub (len $links) 1) }},{{ end }}
+    {{- end }}
+    ]
 {{ "}" | safeHTML }}
 {{ "</script>" | safeHTML }}
 {{ partial "pnpstyles/molecules-card-side-plate-vert" (dict "links" $links) }}
