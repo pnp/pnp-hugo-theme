@@ -20,6 +20,7 @@ export interface NextOccurrence {
     date:     Date;
     status:   string;
     summary?: string;
+    recurrenceId?: string;
 }
 
 export enum Status {
