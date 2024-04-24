@@ -13,6 +13,7 @@
         {{- end }}
     </menu>
 
+    {{.Content | safeHTML }}
     {{ $section := .Site.GetPage "section" "events" }}
     {{ $events := $section.Pages }}
 </div>
