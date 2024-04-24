@@ -1,3 +1,5 @@
+@use 'designtoken.vars' as dt;
+
 body {
     margin: 0;
 
@@ -23,6 +25,19 @@ textarea {
     background-image: url(../images/keyart-bg.webp);
 
     background-position: bottom left;
+}
+
+a{
+    color: dt.$dark-teal;
+    &:visited{
+        color: dt.$dark-teal;
+    }
+    &:active{
+        color: dt.$dark-red;
+    }
+    &:hover{
+        color: dt.$dark-blue;
+    }
 }
 
 
