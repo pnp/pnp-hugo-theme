@@ -4,11 +4,10 @@
     <meta charset="utf-8">
     <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
     {{ partial "head.html" . }}
-    <!-- Made with ❤️ by the PnP team -->
-    <!-- Design by: Stefan Bauer (https://n8d.at/)-->
-    <!-- Template by: Hugo Bernier (https://tahoeninja.blog/)-->
+    {{ "<!-- Made with ❤️ by the PnP team -->" | safeHTML }}
+    {{ "<!-- Design: Stefan Bauer (https://n8d.at/)-->" | safeHTML }}
+    {{ "<!-- Site: Hugo Bernier (https://tahoeninja.blog/)-->" | safeHTML }}
 </head>
-
 <body class="pnp-backdrop">
     <div class="wrapper">
         {{- partial "header.html" . -}}
