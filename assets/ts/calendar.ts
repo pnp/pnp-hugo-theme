@@ -58,7 +58,7 @@ function updateEventStatus(event: ICalEvent, idprefix: string, futureOccurrences
         const cardId = occurrence.recurrenceId ? `${idprefix}${event.uid}-${occurrence.recurrenceId}` : `${idprefix}${event.uid}`;
         const card = document.getElementById(cardId);
         if (!card) {
-            console.log('No card found with id:', cardId);
+            //console.log('No card found with id:', cardId);
             return;
         }
 
