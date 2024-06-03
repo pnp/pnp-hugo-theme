@@ -17,7 +17,10 @@
     {{- block "main" . }}{{- end }}
     </main>
 
-    {{- partial "footer.html" . -}}
+    {{ if ne .Layout "vacation" }}
+        {{- partial "footer.html" . -}}
+    {{ end }}
+
     {{- partial "script.html" . -}}
 
     {{ range .Site.Params.customJS }}

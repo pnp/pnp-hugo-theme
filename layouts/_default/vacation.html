@@ -1,0 +1,14 @@
+{{ define "main" }}
+<section class="vacation" id="{{ .File.BaseFileName | safeHTML }}">
+    <div class="vacation-inner">
+        <p class="text-xl">{{ .Title | safeHTML }}</p>
+        {{ with .Description }}
+            <p class="text-l">{{ . | safeHTML }}</p>
+        {{ else }}
+            {{ with .Content }}
+            <p class="text-l">{{ . | safeHTML }}</p>
+            {{ end }}
+        {{ end }}
+    </div>
+</section>
+{{ end }}

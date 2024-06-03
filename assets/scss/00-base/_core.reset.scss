@@ -6,6 +6,8 @@ body {
     font-family: Parker, "Segoe UI", "Segoe Sans", sans-serif;
 
     scroll-behavior: smooth;
+    content-visibility: visible;
+    contain-intrinsic-size: 10000px; 
 
     // text-rendering: geometricPrecision;text-renderingtext-renderingtext-renderingtext-rendering
 
