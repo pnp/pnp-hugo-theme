@@ -8,6 +8,9 @@
 {{ if .twitter }}
 {{ $links = $links | append (dict "url" .twitter "iconName" "icon-twitter" "ariaHidden" true "title" "Follow on Twitter") }}
 {{ end }}
+{{ if .bluesky }}
+{{ $links = $links | append (dict "url" .bluesky "iconName" "icon-bluesky" "ariaHidden" true "title" "Follow on Bluesky") }}
+{{ end }}
 {{ "<script type='application/ld+json'>" | safeHTML }}
 {{ "{" | safeHTML }}
     "@context": "https://schema.org",
