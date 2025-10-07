@@ -8,5 +8,10 @@
 {{ if .youtubeUrl }}
 {{ $links = $links | append (dict "url" .youtubeUrl "iconName" "icon-video-clip-filled" "ariaHidden" true "title" (printf "Play button - Watch %s on Youtube" .Title)) }}
 {{ end }}
-
+{{ if .meetupUrl }}
+{{ $links = $links | append (dict "url" .meetupUrl "iconName" "icon-meetup" "ariaHidden" true "title" (printf "Meetup icon - View %s on Meetup" .Title)) }}
+{{ end }}
+{{ if .wwwUrl }}
+{{ $links = $links | append (dict "url" .wwwUrl "iconName" "icon-www" "ariaHidden" true "title" (printf "Website icon - View %s on Website" .Title)) }}
+{{ end }}
 {{ partial "pnpstyles/molecules-card-side-plate-vert" (dict "links" $links) }}
