@@ -24,7 +24,7 @@
     {{- partial "script.html" . -}}
 
     {{ range .Site.Params.customJS }}
-    {{ if $.Site.IsServer }}
+    {{ if hugo.IsServer }}
     {{ $script := resources.Get . }}
     <script src="{{ $script.Permalink }}"></script>
     {{ else }}
@@ -34,7 +34,7 @@
     {{ end }}
 
     {{ range .Site.Params.customRemoteJS }}
-    {{ if $.Site.IsServer }}
+    {{ if hugo.IsServer }}
     {{ $script := resources.GetRemote . }}
     <script src="{{ $script.Permalink }}"></script>
     {{ else }}
